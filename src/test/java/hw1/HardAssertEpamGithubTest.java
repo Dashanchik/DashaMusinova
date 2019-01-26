@@ -1,5 +1,6 @@
 package hw1;
 
+import base.SeleniumBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,7 @@ import java.util.ListIterator;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class HardAssertEpamGithubTest {
+public class HardAssertEpamGithubTest extends SeleniumBase {
 
     private WebDriver driver;
 
@@ -33,7 +34,7 @@ public class HardAssertEpamGithubTest {
     }*/
 
     @Test
-    public void HardAssertEpamGithubTest() {
+    public void hardAssertEpamGithubTest() {
         //1 Open test site by URL
         driver.navigate().to("https://epam.github.io/JDI/");
 

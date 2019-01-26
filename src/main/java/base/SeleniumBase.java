@@ -5,11 +5,11 @@ import org.testng.annotations.BeforeSuite;
 
 import static java.lang.System.setProperty;
 
-public class SeleniumBase {
+public abstract class SeleniumBase {
 
     @BeforeSuite
 
     public void beforeSuite() {
-        //setProperty("webdriber", 'khkhk');
+        setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
     }
 }
