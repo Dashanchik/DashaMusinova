@@ -4,7 +4,7 @@ import org.testng.annotations.DataProvider;
 
 public class DataProviders {
 
-    @org.testng.annotations.DataProvider
+    @DataProvider(parallel = true)
     public Object[][] picTexts() {
         return new Object[][]{
                 {0, "To include good practices\n" + "and ideas from successful\n" + "EPAM project"},
