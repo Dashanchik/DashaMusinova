@@ -30,8 +30,8 @@ public class HardAssertEpamGithubTest extends SeleniumBase {
         driver.manage().window().maximize();
     }
 
-    // TODO Is this commented methods required here?
-   /* @AfterMethod
+    /* вместо последнего шага лучше вынести закрытие браузера в аннотацию
+    @AfterMethod
     public void afterMethod(){
         driver.close();
     }*/
@@ -42,7 +42,7 @@ public class HardAssertEpamGithubTest extends SeleniumBase {
         driver.navigate().to("https://epam.github.io/JDI/");
 
         //2 Assert Browser title
-        assertEquals(driver.getTitle(),"Home Page");
+        assertEquals(driver.getTitle(), "Home Page");
 
         //3 Perform login
         driver.findElement(By.cssSelector("[id='user-icon']")).click();
@@ -51,7 +51,7 @@ public class HardAssertEpamGithubTest extends SeleniumBase {
         driver.findElement(By.cssSelector("[id='login-button'")).click();
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(),"PITER CHAILOVSKII");
+        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
 
         //5 Assert Browser title
         assertEquals(driver.getTitle(), "Home Page");
@@ -67,29 +67,29 @@ public class HardAssertEpamGithubTest extends SeleniumBase {
         //7 Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> benefitsIcons = driver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='icons']"));
         assertEquals(benefitsIcons.size(), 4);
-        for (WebElement element: benefitsIcons){
+        for (WebElement element : benefitsIcons) {
             assertTrue(element.isDisplayed());
         }
 
         //8 Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> benefitsTexts = driver.findElements(By.cssSelector("[class='row clerafix benefits'] .benefit-txt"));
         assertEquals(benefitsTexts.size(), 4);
-        // TODO Is using of "\n" required here? Why you use string concatenation for the expected result?
-        assertEquals(benefitsTexts.get(0).getText(), "To include good practices\n" + "and ideas from successful\n" + "EPAM project");
-        assertEquals(benefitsTexts.get(1).getText(), "To be flexible and\n" + "customizable");
+        // TODO Is using of "\n" required here? Why you use string concatenation for the expected result?- use of "\n" required, concatenation deleted
+        assertEquals(benefitsTexts.get(0).getText(), "To include good practices\nand ideas from successful\nEPAM project");
+        assertEquals(benefitsTexts.get(1).getText(), "To be flexible and\ncustomizable");
         assertEquals(benefitsTexts.get(2).getText(), "To be multiplatform");
-        assertEquals(benefitsTexts.get(3).getText(), "Already have good base\n" + "(about 20 internal and\n" + "some external projects),\n" + "wish to get more…");
+        assertEquals(benefitsTexts.get(3).getText(), "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
 
         //9 Assert a text of the main headers
         assertEquals(driver.findElement(By.name("main-title")).getText(), "EPAM FRAMEWORK WISHES…");
         assertEquals(driver.findElement(By.name("jdi-text")).getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10 Assert that there is the iframe in the center of page
-        /* TODO
+        /* TODO - fixed
             Please make a proper assertion. In this step you verify that you have some iframe by tagName.
             You could get that several iframes exist on the page
         */
-        assertTrue(driver.findElements(By.tagName("iframe")).size() != 0);
+        assertTrue(driver.findElements(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).size() != 0);
 
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");
@@ -102,9 +102,9 @@ public class HardAssertEpamGithubTest extends SeleniumBase {
         assertEquals(driver.findElement(By.cssSelector("[class='text-center']")).getText(), "JDI GITHUB");
 
         //14 Assert that JDI GITHUB is a link and has a proper URL
-        // TODO link is not good name for variable here. What is link for?
-        String link = driver.findElement(By.linkText("JDI GITHUB")).getAttribute("href");
-        assertEquals(link, "https://github.com/epam/JDI");
+        // TODO link is not good name for variable here. What is link for? - fixed
+        String jdiLink = driver.findElement(By.linkText("JDI GITHUB")).getAttribute("href");
+        assertEquals(jdiLink, "https://github.com/epam/JDI");
 
         //15 Assert that there is Left Section
         assertTrue(driver.findElement(By.name("navigation-sidebar")).isDisplayed());
