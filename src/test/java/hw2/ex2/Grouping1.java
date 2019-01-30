@@ -14,12 +14,17 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 
+// TODO Grouping1 is not clean name for class
+// TODO Please check all my comments for HW1. They are related for this HW
 public class Grouping1 extends SeleniumBase {
 
+    // TODO Is this web driver required here? It is unused
     private WebDriver driver;
+    // TODO should be 1 empty line
 
 
     @Test(groups = "Smoke")
+    // TODO Not good name for test
     public void copy1() {
 
         //0 Create Webdriver instance and maximise window
@@ -97,7 +102,9 @@ public class Grouping1 extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
+    // TODO empty line missed
     @Test(groups = "Smoke")
+    // TODO mot good name for test
     public void copy2() {
         //0 Create Webdriver instance and maximise window
         WebDriver driver = new ChromeDriver();
@@ -174,7 +181,9 @@ public class Grouping1 extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
+    // TODO empty line missed
     @Test(groups = "Smoke")
+    // TODO not good name for the test
     public void copy3() {
         //0 Create Webdriver instance and maximise window
         WebDriver driver = new ChromeDriver();

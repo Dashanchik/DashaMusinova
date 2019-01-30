@@ -15,6 +15,11 @@ import static org.testng.Assert.assertEquals;
 public class IndexPicTextTest extends SeleniumBase {
 
     @Test(dataProvider = "picTexts", dataProviderClass = DataProviders.class)
+    /* TODO
+        1. what does i parameter mean?
+        2. what does s parameter mean?
+        This is not convenient parameter name
+     */
     public void indexPicTextTest(int i, String s) {
         //0 Create new WebDriver instance
         WebDriver driver = new ChromeDriver();

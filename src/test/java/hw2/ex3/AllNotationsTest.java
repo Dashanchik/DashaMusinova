@@ -13,12 +13,15 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+// TODO Check comments for the HW1
 public class AllNotationsTest extends SeleniumBase {
 
     private WebDriver driver;
+    // TODO should be 1 empty line
 
 
     @BeforeClass
+    // TODO I recommend think about creation driver for the class instance in BeforeClass
     public void beforeClass() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -35,6 +38,7 @@ public class AllNotationsTest extends SeleniumBase {
     }
 
     @AfterClass
+    // TODO I recommend think about close driver for the class instance in AfterClass
     public void afterClass() {
         driver.close();
     }
