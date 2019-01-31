@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -13,14 +12,11 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-// TODO Plese check comments for Grouping1 class
-public class Grouping3 extends SeleniumBase {
-
-    private WebDriver driver;
-
+// TODO Plese check comments for Grouping1 class - fixed
+public class RegressionOrSmokeTestsForGroupingExercise extends SeleniumBase {
 
     @Test(groups = "Regression")
-    public void copy1() {
+    public void regressionTest1() {
         //0 Create Webdriver instance and maximise window
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -71,11 +67,11 @@ public class Grouping3 extends SeleniumBase {
         assertEquals(driver.findElement(By.name("jdi-text")).getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10 Assert that there is the iframe in the center of page
-        assertTrue(driver.findElements(By.tagName("iframe")).size() != 0);
+        assertTrue(driver.findElement(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).isDisplayed());
 
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");
-        assertTrue(driver.findElements(By.cssSelector("[class='epam-logo'] img")).size() != 0);
+        assertTrue(driver.findElement(By.cssSelector("[class='epam-logo'] img")).isDisplayed());
 
         //12 Switch to original window back
         driver.switchTo().defaultContent();
@@ -96,8 +92,9 @@ public class Grouping3 extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
+
     @Test(groups = "Regression")
-    public void copy2() {
+    public void regressionTest2() {
         //0 Create Webdriver instance and maximise window
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -148,7 +145,7 @@ public class Grouping3 extends SeleniumBase {
         assertEquals(driver.findElement(By.name("jdi-text")).getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10 Assert that there is the iframe in the center of page
-        assertTrue(driver.findElements(By.tagName("iframe")).size() != 0);
+        assertTrue(driver.findElement(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).isDisplayed());
 
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");
@@ -173,8 +170,9 @@ public class Grouping3 extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
+
     @Test(groups = "Smoke")
-    public void copy3() {
+    public void smokeTest1() {
         //0 Create Webdriver instance and maximise window
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -225,7 +223,7 @@ public class Grouping3 extends SeleniumBase {
         assertEquals(driver.findElement(By.name("jdi-text")).getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10 Assert that there is the iframe in the center of page
-        assertTrue(driver.findElements(By.tagName("iframe")).size() != 0);
+        assertTrue(driver.findElement(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).isDisplayed());
 
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");

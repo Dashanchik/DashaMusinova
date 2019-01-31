@@ -8,12 +8,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import java.util.List;
+
+import static org.testng.Assert.assertTrue;
 
 public class SoftAssertEpamGithubTest extends SeleniumBase {
 
     private WebDriver driver;
     private SoftAssert softAssert;
+
     @BeforeMethod
     public void beforeMethod() {
         driver = new ChromeDriver();
@@ -21,15 +25,10 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         softAssert = new SoftAssert();
     }
 
-    /* TODO
+    /* TODO - deleted, fixed
         Is this commented method required here?
         I guess it could be delete if it is not used
     */
-   /* вместо последнего шага лучше вынести закрытие браузера в аннотацию
-   @AfterMethod
-    public void afterMethod(){
-        driver.close();
-    }*/
 
     @Test
     public void softAssertEpamGithubTest() {
@@ -37,7 +36,7 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         driver.navigate().to("https://epam.github.io/JDI/");
 
         //2 Assert Browser title
-         softAssert.assertEquals(driver.getTitle(),"Home Page");
+        softAssert.assertEquals(driver.getTitle(), "Home Page");
 
         //3 Perform login
         driver.findElement(By.cssSelector("[id='user-icon']")).click();
@@ -46,7 +45,7 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         driver.findElement(By.cssSelector("[id='login-button'")).click();
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        softAssert.assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(),"PITER CHAILOVSKII");
+        softAssert.assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
 
         //5 Assert Browser title
         softAssert.assertEquals(driver.getTitle(), "Home Page");
@@ -62,7 +61,7 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         //7 Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> benefitsIcons = driver.findElements(By.cssSelector("[class='row clerafix benefits'] [class^='icons']"));
         softAssert.assertEquals(benefitsIcons.size(), 4);
-        for (WebElement element: benefitsIcons){
+        for (WebElement element : benefitsIcons) {
             softAssert.assertTrue(element.isDisplayed());
         }
 
@@ -79,19 +78,19 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         softAssert.assertEquals(driver.findElement(By.name("jdi-text")).getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10 Assert that there is the iframe in the center of page
-        /* TODO
+        /* TODO - fixed
             Please make a proper assertion. In this step you verify that you have some iframe by tagName.
             You could get that several iframes exist on the page
         */
-        /* TODO
+        /* TODO - fixed
             You verify a collection. This assertion will be green if you have more that one <iframe>
             May be it is better check <iframe> not as collection???
          */
-        softAssert.assertTrue(driver.findElements(By.tagName("iframe")).size() != 0);
+        softAssert.assertTrue(driver.findElement(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).isDisplayed());
 
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");
-        softAssert.assertTrue(driver.findElements(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).size() != 0);
+        assertTrue(driver.findElement(By.cssSelector("[class='epam-logo'] img")).isDisplayed());
 
         //12 Switch to original window back
         driver.switchTo().defaultContent();
@@ -111,7 +110,8 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
 
         //17 Close Browser
         driver.close();
-        // TODO the final assertion is missing. Please add appropriate assertion
+        // TODO the final assertion is missing. Please add appropriate assertion - fixed
+        softAssert.assertAll();
     }
 
 }

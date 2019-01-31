@@ -2,7 +2,6 @@ package hw2.ex3;
 
 import base.SeleniumBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,34 +12,34 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-// TODO Check comments for the HW1
+// TODO Check comments for the HW1 - fixed
 public class AllNotationsTest extends SeleniumBase {
 
     private WebDriver driver;
-    // TODO should be 1 empty line
-
+    // TODO should be 1 empty line - fixed
 
     @BeforeClass
-    // TODO I recommend think about creation driver for the class instance in BeforeClass
+    // TODO I recommend think about creation driver for the class instance in BeforeClass - fixed
     public void beforeClass() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        System.out.println(System.currentTimeMillis());
     }
 
     @BeforeMethod
     public void beforeMethod() {
-        System.out.println(System.currentTimeMillis());
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
     }
 
     @AfterMethod
     public void afterMethod() {
-        System.out.println(System.currentTimeMillis());
+        driver.close();
     }
 
     @AfterClass
-    // TODO I recommend think about close driver for the class instance in AfterClass
+    // TODO I recommend think about close driver for the class instance in AfterClass - fixed
     public void afterClass() {
-        driver.close();
+        System.out.println(System.currentTimeMillis());
     }
 
     @Test
@@ -60,9 +59,8 @@ public class AllNotationsTest extends SeleniumBase {
         //4 Assert User name in the left-top side of screen that user is loggined
         assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
 
-        //5 Assert and get Browser title
+        //5 Assert Browser title
         assertEquals(driver.getTitle(), "Home Page");
-        System.out.println(driver.getTitle());
 
         //6 Assert that there are 4 items on the header section displayed and they have proper texts
         List<WebElement> navBar = driver.findElements(By.cssSelector("[class='uui-navigation nav navbar-nav m-l8']>li"));
@@ -82,21 +80,21 @@ public class AllNotationsTest extends SeleniumBase {
         //8 Assert that there are 4 texts on the Index Page under icons and they have proper text
         List<WebElement> benefitsTexts = driver.findElements(By.cssSelector("[class='row clerafix benefits'] .benefit-txt"));
         assertEquals(benefitsTexts.size(), 4);
-        assertEquals(benefitsTexts.get(0).getText(), "To include good practices\n" + "and ideas from successful\n" + "EPAM project");
-        assertEquals(benefitsTexts.get(1).getText(), "To be flexible and\n" + "customizable");
+        assertEquals(benefitsTexts.get(0).getText(), "To include good practices\nand ideas from successful\nEPAM project");
+        assertEquals(benefitsTexts.get(1).getText(), "To be flexible and\ncustomizable");
         assertEquals(benefitsTexts.get(2).getText(), "To be multiplatform");
-        assertEquals(benefitsTexts.get(3).getText(), "Already have good base\n" + "(about 20 internal and\n" + "some external projects),\n" + "wish to get more…");
+        assertEquals(benefitsTexts.get(3).getText(), "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…");
 
         //9 Assert a text of the main headers
         assertEquals(driver.findElement(By.name("main-title")).getText(), "EPAM FRAMEWORK WISHES…");
         assertEquals(driver.findElement(By.name("jdi-text")).getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10 Assert that there is the iframe in the center of page
-        assertTrue(driver.findElements(By.tagName("iframe")).size() != 0);
+        assertTrue(driver.findElement(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).isDisplayed());
 
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         driver.switchTo().frame("iframe");
-        assertTrue(driver.findElements(By.cssSelector("[class='epam-logo'] img")).size() != 0);
+        assertTrue(driver.findElement(By.cssSelector("[class='epam-logo'] img")).isDisplayed());
 
         //12 Switch to original window back
         driver.switchTo().defaultContent();
@@ -105,8 +103,8 @@ public class AllNotationsTest extends SeleniumBase {
         assertEquals(driver.findElement(By.cssSelector("[class='text-center']")).getText(), "JDI GITHUB");
 
         //14 Assert that JDI GITHUB is a link and has a proper URL
-        String link = driver.findElement(By.linkText("JDI GITHUB")).getAttribute("href");
-        assertEquals(link, "https://github.com/epam/JDI");
+        String jdiLink = driver.findElement(By.linkText("JDI GITHUB")).getAttribute("href");
+        assertEquals(jdiLink, "https://github.com/epam/JDI");
 
         //15 Assert that there is Left Section
         assertTrue(driver.findElement(By.name("navigation-sidebar")).isDisplayed());
@@ -114,8 +112,6 @@ public class AllNotationsTest extends SeleniumBase {
         //16 Assert that there is Footer
         assertTrue(driver.findElement(By.cssSelector("[class^='footer'")).isDisplayed());
 
-
     }
 
 }
-

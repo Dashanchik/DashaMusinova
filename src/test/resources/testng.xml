@@ -1,10 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
-<suite name="TestNg Suite" >
+<suite name="TestNg Suite">
     <test name="Test 1">
         <classes>
             <class name="hw2.ex1.IndexPicTextTest"/>
         </classes>
-
     </test>
 </suite>

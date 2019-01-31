@@ -1,19 +1,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<!-- TODO
+<!-- TODO - fixed
         format xml file
         empty line is not required here
 -->
-
-<suite name="Smoke Suite" >
-<test name="Smoke Test 1" parallel="methods" thread-count="3">
-    <groups>
-        <define name="Smoke"/>
-        <run>
-            <include name="Smoke"/>
-        </run>
-    </groups>
-    <packages>
-        <package name="hw2.ex2"/>
-    </packages>
-</test>
+<suite name="Smoke Suite">
+    <test name="Smoke Test 1" parallel="methods" thread-count="3">
+        <groups>
+            <define name="Smoke"/>
+            <run>
+                <include name="Smoke"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="hw2.ex2"/>
+        </packages>
+    </test>
 </suite>
