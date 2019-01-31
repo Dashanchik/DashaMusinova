@@ -1,4 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- TODO
+        format xml file
+        empty line is not required here
+-->
 
 <suite name="Regression Suite" >
     <test name="Regression Test 1" parallel="methods" thread-count="3">

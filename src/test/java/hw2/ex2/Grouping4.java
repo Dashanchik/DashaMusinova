@@ -13,7 +13,7 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-
+// TODO Plese check comments for Grouping1 class
 public class Grouping4 extends SeleniumBase {
 
     private WebDriver driver;
@@ -96,6 +96,7 @@ public class Grouping4 extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
+    // TODO empty line missed
     @Test(groups = {"Smoke", "Regression"})
     public void copy2() {
         //0 Create Webdriver instance and maximise window
@@ -173,6 +174,7 @@ public class Grouping4 extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
+    // TODO empty line missed
     @Test(groups = {"Smoke", "Regression"})
     public void copy3() {
         //0 Create Webdriver instance and maximise window
