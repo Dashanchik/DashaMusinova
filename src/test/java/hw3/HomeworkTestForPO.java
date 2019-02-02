@@ -1,4 +1,4 @@
-package hw1;
+package hw3;
 
 import base.SeleniumBase;
 import base.enums.Headers;
@@ -12,7 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class HardAssertEpamGithubTest extends SeleniumBase {
+public class HomeworkTestForPO extends SeleniumBase {
 
     private WebDriver driver;
     public IndexPage indexPage;

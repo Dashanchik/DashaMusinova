@@ -25,11 +25,6 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         softAssert = new SoftAssert();
     }
 
-    /* TODO - deleted, fixed
-        Is this commented method required here?
-        I guess it could be delete if it is not used
-    */
-
     @Test
     public void softAssertEpamGithubTest() {
         //1 Open test site by URL
@@ -78,14 +73,6 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         softAssert.assertEquals(driver.findElement(By.name("jdi-text")).getText(), "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
 
         //10 Assert that there is the iframe in the center of page
-        /* TODO - fixed
-            Please make a proper assertion. In this step you verify that you have some iframe by tagName.
-            You could get that several iframes exist on the page
-        */
-        /* TODO - fixed
-            You verify a collection. This assertion will be green if you have more that one <iframe>
-            May be it is better check <iframe> not as collection???
-         */
         softAssert.assertTrue(driver.findElement(By.cssSelector("[src='https://epam.github.io/JDI/index.html']")).isDisplayed());
 
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
@@ -110,8 +97,6 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
 
         //17 Close Browser
         driver.close();
-        // TODO the final assertion is missing. Please add appropriate assertion - fixed
         softAssert.assertAll();
     }
-
 }

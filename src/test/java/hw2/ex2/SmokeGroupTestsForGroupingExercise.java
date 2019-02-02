@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -13,15 +12,9 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-
-// TODO SmokeGroupTestsForGroupingExercise is not clean name for class - fixed
-// TODO Please check all my comments for HW1. They are related for this HW
 public class SmokeGroupTestsForGroupingExercise extends SeleniumBase {
 
-    // TODO Is this web driver required here? It is unused - deleted, fixed
-    // TODO should be 1 empty line - excessive empty line deleted, fixed
     @Test(groups = "Smoke")
-    // TODO Not good name for test - test name changed, fixed
     public void SmokeTest1() {
 
         //0 Create Webdriver instance and maximise window
@@ -99,10 +92,8 @@ public class SmokeGroupTestsForGroupingExercise extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
-    // TODO empty line missed - added, fixed
 
     @Test(groups = "Smoke")
-    // TODO mot good name for test - changed, fixed
     public void SmokeTest2() {
         //0 Create Webdriver instance and maximise window
         WebDriver driver = new ChromeDriver();
@@ -179,10 +170,8 @@ public class SmokeGroupTestsForGroupingExercise extends SeleniumBase {
         //17 Close Browser
         driver.close();
     }
-    // TODO empty line missed - added, fixed
 
     @Test(groups = "Smoke")
-    // TODO not good name for the test - changed, fixed
     public void SmokeTest3() {
         //0 Create Webdriver instance and maximise window
         WebDriver driver = new ChromeDriver();

@@ -15,11 +15,6 @@ import static org.testng.Assert.assertEquals;
 public class IndexPicTextTest extends SeleniumBase {
 
     @Test(dataProvider = "benefitIconsText", dataProviderClass = DataProviders.class)
-    /* TODO - fixed
-        1. what does i parameter mean? changed for iconIndex
-        2. what does s parameter mean? changed for iconText
-        This is not convenient parameter name
-     */
     public void benefitIconsTextTest(int iconIndex, String iconText) {
         //0 Create new WebDriver instance
         WebDriver driver = new ChromeDriver();

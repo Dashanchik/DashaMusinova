@@ -12,14 +12,11 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-// TODO Check comments for the HW1 - fixed
 public class AllNotationsTest extends SeleniumBase {
 
     private WebDriver driver;
-    // TODO should be 1 empty line - fixed
 
     @BeforeClass
-    // TODO I recommend think about creation driver for the class instance in BeforeClass - fixed
     public void beforeClass() {
         System.out.println(System.currentTimeMillis());
     }
@@ -37,7 +34,6 @@ public class AllNotationsTest extends SeleniumBase {
     }
 
     @AfterClass
-    // TODO I recommend think about close driver for the class instance in AfterClass - fixed
     public void afterClass() {
         System.out.println(System.currentTimeMillis());
     }

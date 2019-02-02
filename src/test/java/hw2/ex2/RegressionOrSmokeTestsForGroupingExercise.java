@@ -12,7 +12,6 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-// TODO Plese check comments for Grouping1 class - fixed
 public class RegressionOrSmokeTestsForGroupingExercise extends SeleniumBase {
 
     @Test(groups = "Regression")
