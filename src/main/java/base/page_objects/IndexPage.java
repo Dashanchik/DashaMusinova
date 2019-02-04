@@ -12,8 +12,10 @@ import static org.testng.Assert.assertTrue;
 
 public class IndexPage {
 
-    // TODO Why you do not use shorter syntax for CSS locator
-    @FindBy(css = "[id='user-icon']")
+    public static final String PAGE_TITLE = "Home Page";
+
+    // TODO Why you do not use shorter syntax for CSS locator - fixed
+    @FindBy(id = "user-icon")
     private WebElement loginIcon;
 
     @FindBy(css = "[id='name']")
@@ -41,13 +43,13 @@ public class IndexPage {
     private WebElement mainHeader;
 
     @FindBy(name = "jdi-text")
-    private WebElement mainHeaderText;
+    private WebElement textUnderHeader;
 
     @FindBy(css = "[src='https://epam.github.io/JDI/index.html']")
     private WebElement iFrame;
 
-    // TODO Why you decide use '@FindBy(id = "epam_logo")' here?
-    @FindBy(id = "epam_logo")
+    // TODO Why you decide use '@FindBy(id = "epam_logo")' here? - xpath used instead, fixed
+    @FindBy(xpath = "//*[@id='epam_logo']")
     private WebElement epamLogo;
 
     @FindBy(css = "[class='text-center']>a")
@@ -76,8 +78,8 @@ public class IndexPage {
         driver.navigate().to(url.value);
     }
 
-    public void checkPageTitle(Headers pageTitle) {
-        assertEquals(driver.getTitle(), pageTitle.toString());
+    public void checkPageTitle(String pageTitle) {
+        assertEquals(driver.getTitle(), pageTitle);
     }
 
     public void checkNavigationBarItems() {
@@ -85,16 +87,19 @@ public class IndexPage {
         for (WebElement element : navBarItems) {
             assertTrue(element.isDisplayed());
         }
-        assertEquals(navBarItems.get(0).getText(), NavBarMenuItems.FIRST_ITEM.toString());
-        assertEquals(navBarItems.get(1).getText(), NavBarMenuItems.SECOND_ITEM.toString());
-        assertEquals(navBarItems.get(2).getText(), NavBarMenuItems.THIRD_ITEM.toString());
-        assertEquals(navBarItems.get(3).getText(), NavBarMenuItems.FOURTH_ITEM.toString());
+        assertEquals(navBarItems.get(0).getText(), NavBarMenuItems.HOME.toString());
+        assertEquals(navBarItems.get(1).getText(), NavBarMenuItems.CONTACT.toString());
+        assertEquals(navBarItems.get(2).getText(), NavBarMenuItems.SERVICE.toString());
+        assertEquals(navBarItems.get(3).getText(), NavBarMenuItems.METALS_COLORS.toString());
 
     }
 
     public void checkBenefitIcons() {
-        // TODO Is this assertion could provide us information, that images are displayed?
+        // TODO Is this assertion could provide us information, that images are displayed? - fixed
         assertEquals(benefitIcons.size(), 4);
+        for(WebElement element : benefitIcons) {
+            assertTrue(element.isDisplayed());
+        }
     }
 
     public void checkBenefitIconsText() {
@@ -104,14 +109,14 @@ public class IndexPage {
         assertEquals(benefitIconsText.get(3).getText(), BenefitIconsText.BASE.toString());
     }
 
-    public void checkMainHeader() {
-        // TODO I suppose that for current method name 'checkMainHeaderText' will be better
+    public void checkMainHeaderText() {
+        // TODO I suppose that for current method name 'checkTextUnderHeader' will be better - name changed, fixed
         assertEquals(mainHeader.getText(), Headers.MAIN_HEADER.toString());
     }
 
-    public void checkMainHeaderText() {
-        // TODO The method name does not correlate with assertion
-        assertEquals(mainHeaderText.getText(), Headers.TEXT_UNDER_HEADER.toString());
+    public void checkTextUnderHeader() {
+        // TODO The method name does not correlate with assertion - name changed, fixed
+        assertEquals(textUnderHeader.getText(), Headers.TEXT_UNDER_HEADER.toString());
     }
 
     public void checkIFrameLogo() {
@@ -121,18 +126,18 @@ public class IndexPage {
         driver.switchTo().defaultContent();
     }
 
-    public void checkSubHeader() {
-        // TODO I guess that here should be 'checkSubHeaderText'
+    public void checkSubHeaderText() {
+        // TODO I guess that here should be 'checkSubHeaderText' - fixed
         assertEquals(subHeader.getText(), Headers.SUB_HEADER.toString());
     }
 
-    public void checkSubHeaderLink() {
-        // TODO Method name does not correlate with the assertion
+    public void checkSubHeaderLinkURL() {
+        // TODO Method name does not correlate with the assertion - fixed
         assertEquals(subHeader.getAttribute("href"), Links.JDI_GITHUB.toString());
     }
 
-    // TODO What do you mean under the "Left Selection"?
-    public void checkLeftSection() {
+    // TODO What do you mean under the "Left Selection"? - fixed
+    public void leftMenuBar() {
         assertTrue(leftSection.isDisplayed());
     }
 

@@ -1,14 +1,14 @@
 package base.enums;
 
 public enum NavBarMenuItems {
-    /* TODO
+    /* TODO - fixed
         Please try provide more convenient names for the enums.
-        From the test it is not clear what do you mean under FIRST_ITEM or SECOND_ITEM
+        From the test it is not clear what do you mean under HOME or CONTACT
      */
-    FIRST_ITEM("HOME"),
-    SECOND_ITEM("CONTACT FORM"),
-    THIRD_ITEM("SERVICE"),
-    FOURTH_ITEM("METALS & COLORS");
+    HOME("HOME"),
+    CONTACT("CONTACT FORM"),
+    SERVICE("SERVICE"),
+    METALS_COLORS("METALS & COLORS");
 
     private String value;
 

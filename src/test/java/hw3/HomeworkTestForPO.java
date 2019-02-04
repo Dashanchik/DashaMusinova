@@ -1,7 +1,6 @@
 package hw3;
 
 import base.SeleniumBase;
-import base.enums.Headers;
 import base.enums.Links;
 import base.enums.Users;
 import base.page_objects.IndexPage;
@@ -35,7 +34,7 @@ public class HomeworkTestForPO extends SeleniumBase {
         indexPage.open(Links.INDEX_PAGE);
 
         //2 Assert Browser title
-        indexPage.checkPageTitle(Headers.PAGE_TITLE);
+        indexPage.checkPageTitle(IndexPage.PAGE_TITLE);
 
         //3 Perform login and Assert User name in the left-top side of screen that user is loggined
         indexPage.login(Users.PITER);
@@ -50,20 +49,20 @@ public class HomeworkTestForPO extends SeleniumBase {
         indexPage.checkBenefitIconsText();
 
         //7 Assert a text of the main headers
-        indexPage.checkMainHeader();
         indexPage.checkMainHeaderText();
+        indexPage.checkTextUnderHeader();
 
         //8 Assert that there is the iframe in the center of page, switch to the iframe and check that there is Epam logo in the left top conner of iframe and switch back to original window
         indexPage.checkIFrameLogo();
 
         //9 Assert a text of the sub header is correct
-        indexPage.checkSubHeader();
+        indexPage.checkSubHeaderText();
 
         //10 Assert that JDI GITHUB is a link and has a proper URL
-        indexPage.checkSubHeaderLink();
+        indexPage.checkSubHeaderLinkURL();
 
         //11 Assert that there is Left Section
-        indexPage.checkLeftSection();
+        indexPage.leftMenuBar();
 
         //12 Assert that there is Footer
         indexPage.checkFooter();
