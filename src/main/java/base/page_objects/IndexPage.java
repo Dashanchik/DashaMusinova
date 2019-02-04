@@ -12,6 +12,7 @@ import static org.testng.Assert.assertTrue;
 
 public class IndexPage {
 
+    // TODO Why you do not use shorter syntax for CSS locator
     @FindBy(css = "[id='user-icon']")
     private WebElement loginIcon;
 
@@ -45,6 +46,7 @@ public class IndexPage {
     @FindBy(css = "[src='https://epam.github.io/JDI/index.html']")
     private WebElement iFrame;
 
+    // TODO Why you decide use '@FindBy(id = "epam_logo")' here?
     @FindBy(id = "epam_logo")
     private WebElement epamLogo;
 
@@ -91,6 +93,7 @@ public class IndexPage {
     }
 
     public void checkBenefitIcons() {
+        // TODO Is this assertion could provide us information, that images are displayed?
         assertEquals(benefitIcons.size(), 4);
     }
 
@@ -102,10 +105,12 @@ public class IndexPage {
     }
 
     public void checkMainHeader() {
+        // TODO I suppose that for current method name 'checkMainHeaderText' will be better
         assertEquals(mainHeader.getText(), Headers.MAIN_HEADER.toString());
     }
 
     public void checkMainHeaderText() {
+        // TODO The method name does not correlate with assertion
         assertEquals(mainHeaderText.getText(), Headers.TEXT_UNDER_HEADER.toString());
     }
 
@@ -117,14 +122,16 @@ public class IndexPage {
     }
 
     public void checkSubHeader() {
+        // TODO I guess that here should be 'checkSubHeaderText'
         assertEquals(subHeader.getText(), Headers.SUB_HEADER.toString());
     }
 
     public void checkSubHeaderLink() {
-
+        // TODO Method name does not correlate with the assertion
         assertEquals(subHeader.getAttribute("href"), Links.JDI_GITHUB.toString());
     }
 
+    // TODO What do you mean under the "Left Selection"?
     public void checkLeftSection() {
         assertTrue(leftSection.isDisplayed());
     }
