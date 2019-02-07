@@ -14,7 +14,6 @@ public class IndexPage {
 
     public static final String PAGE_TITLE = "Home Page";
 
-    // TODO Why you do not use shorter syntax for CSS locator - fixed
     @FindBy(id = "user-icon")
     private WebElement loginIcon;
 
@@ -95,7 +94,6 @@ public class IndexPage {
     }
 
     public void checkBenefitIcons() {
-        // TODO Is this assertion could provide us information, that images are displayed? - fixed
         assertEquals(benefitIcons.size(), 4);
         for(WebElement element : benefitIcons) {
             assertTrue(element.isDisplayed());
@@ -110,12 +108,10 @@ public class IndexPage {
     }
 
     public void checkMainHeaderText() {
-        // TODO I suppose that for current method name 'checkTextUnderHeader' will be better - name changed, fixed
         assertEquals(mainHeader.getText(), Headers.MAIN_HEADER.toString());
     }
 
     public void checkTextUnderHeader() {
-        // TODO The method name does not correlate with assertion - name changed, fixed
         assertEquals(textUnderHeader.getText(), Headers.TEXT_UNDER_HEADER.toString());
     }
 
@@ -127,16 +123,13 @@ public class IndexPage {
     }
 
     public void checkSubHeaderText() {
-        // TODO I guess that here should be 'checkSubHeaderText' - fixed
         assertEquals(subHeader.getText(), Headers.SUB_HEADER.toString());
     }
 
     public void checkSubHeaderLinkURL() {
-        // TODO Method name does not correlate with the assertion - fixed
         assertEquals(subHeader.getAttribute("href"), Links.JDI_GITHUB.toString());
     }
 
-    // TODO What do you mean under the "Left Selection"? - fixed
     public void leftMenuBar() {
         assertTrue(leftSection.isDisplayed());
     }
