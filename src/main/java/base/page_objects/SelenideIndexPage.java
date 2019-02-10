@@ -3,7 +3,6 @@ package base.page_objects;
 import base.DataProviders.ServicesData;
 import base.SelenideBase;
 import base.enums.*;
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
@@ -46,6 +45,12 @@ public class SelenideIndexPage extends SelenideBase {
 
     @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8']>li")
     private List<SelenideElement> headerMenuItems;
+
+    @FindBy(css = "[class='dropdown']")
+    private SelenideElement servicesDropdownHeaderMenuItem;
+
+    @FindBy(css = "[class='dropdown-menu")
+    private SelenideElement servicesDropdownHeaderMenuList;
 
     @FindBy(css = "[class^='icons-benefit']")
     private List<SelenideElement> benefitIcons;
@@ -155,7 +160,7 @@ public class SelenideIndexPage extends SelenideBase {
         assertTrue(serviceHeaderElementsTexts.containsAll(Arrays.asList(ServicesData.servicesMenuItems())));
     }
 
-    public void chceckServicesDropdownMenuInSidebar() {
+    public void checkServicesDropdownMenuInSidebar() {
         SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
         servicesDropdownSidebarMenu.click();
         Collection<SelenideElement> servicesSidebarElements = servicesDropdownSidebarMenu.findAll(By.cssSelector("ul>li"));
@@ -164,8 +169,12 @@ public class SelenideIndexPage extends SelenideBase {
     }
 
     public void openDifferentElementsPage() {
-        SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
-        servicesDropdownHeaderMenu.click();
-        servicesDropdownHeaderMenu.find(byText("Different elements")).click();
+        servicesDropdownHeaderMenuItem.click();
+        servicesDropdownHeaderMenuList.find(byText("Different elements")).click();
+    }
+
+    public void openDatesPage() {
+        servicesDropdownHeaderMenuItem.click();
+        servicesDropdownHeaderMenuList.find(byText("Dates")).click();
     }
 }

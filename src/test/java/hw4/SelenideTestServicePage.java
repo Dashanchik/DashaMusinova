@@ -1,5 +1,6 @@
 package hw4;
 
+import base.SelenideBase;
 import base.enums.*;
 import base.page_objects.SelenideDifferentElementsPage;
 import base.page_objects.SelenideIndexPage;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertEquals;
 
-public class SelenideTestServicePage {
+public class SelenideTestServicePage extends SelenideBase {
 
     private SelenideIndexPage indexPage;
     private SelenideDifferentElementsPage differentElementsPage;
@@ -43,7 +44,7 @@ public class SelenideTestServicePage {
         indexPage.checkServicesDropdownMenuInHeader();
 
         //6 Click on Service subcategory in the left section and check that drop down contains options
-        indexPage.chceckServicesDropdownMenuInSidebar();
+        indexPage.checkServicesDropdownMenuInSidebar();
 
         //7 Open through the header menu Service -> Different Elements Page
         indexPage.openDifferentElementsPage();
