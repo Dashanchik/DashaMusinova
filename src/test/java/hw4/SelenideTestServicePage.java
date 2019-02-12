@@ -31,6 +31,7 @@ public class SelenideTestServicePage extends SelenideBase {
     @Test
     public void servicePageInterfaceCheck() {
         //1 Open test site by URL
+        // TODO Is toString required?
         open(Links.INDEX_PAGE.toString());
 
         //2 Assert Browser title

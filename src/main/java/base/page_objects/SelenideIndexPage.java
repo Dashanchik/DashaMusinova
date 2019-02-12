@@ -152,14 +152,17 @@ public class SelenideIndexPage extends SelenideBase {
         assertTrue(footer.isDisplayed());
     }
 
+    // TODO This method should be parametrized
     public void checkServicesDropdownMenuInHeader() {
         SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
         servicesDropdownHeaderMenu.click();
         Collection<SelenideElement> servicesHeaderElements = servicesDropdownHeaderMenu.findAll(By.cssSelector("ul>li"));
+        // TODO Please look to the IDEA warning
         Collection<String> serviceHeaderElementsTexts = servicesHeaderElements.stream().map(element -> element.getText()).collect(Collectors.toList());
         assertTrue(serviceHeaderElementsTexts.containsAll(Arrays.asList(ServicesData.servicesMenuItems())));
     }
 
+    // TODO This method should be parametrized
     public void checkServicesDropdownMenuInSidebar() {
         SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
         servicesDropdownSidebarMenu.click();
@@ -168,11 +171,13 @@ public class SelenideIndexPage extends SelenideBase {
         assertTrue(servicesSidebarElementsTexts.containsAll(Arrays.asList(ServicesData.servicesMenuItems())));
     }
 
+    // TODO This method should be parametrized
     public void openDifferentElementsPage() {
         servicesDropdownHeaderMenuItem.click();
         servicesDropdownHeaderMenuList.find(byText("Different elements")).click();
     }
 
+    // TODO This method should be parametrized
     public void openDatesPage() {
         servicesDropdownHeaderMenuItem.click();
         servicesDropdownHeaderMenuList.find(byText("Dates")).click();

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class SelenideDatesPage extends SelenideBase {
 
+    // TODO Why is it public
     public static final String PAGE_TITLE = "Dates";
 
     @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8']>li")
