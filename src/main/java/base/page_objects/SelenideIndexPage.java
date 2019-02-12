@@ -1,6 +1,6 @@
 package base.page_objects;
 
-import base.DataProviders.ServicesData;
+import base.DataProviders.ServiceMenuItems;
 import base.SelenideBase;
 import base.enums.*;
 import com.codeborne.selenide.SelenideElement;
@@ -152,32 +152,40 @@ public class SelenideIndexPage extends SelenideBase {
         assertTrue(footer.isDisplayed());
     }
 
-    // TODO This method should be parametrized
+    // TODO This method should be parametrized - wasn't in the task
     public void checkServicesDropdownMenuInHeader() {
         SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
+        Collection<SelenideElement> servicesHeaderElements;
+        Collection<String> serviceHeaderElementsTexts;
+        List<String> serviceMenuItems;
+        // TODO Please look to the IDEA warning - fixed
         servicesDropdownHeaderMenu.click();
-        Collection<SelenideElement> servicesHeaderElements = servicesDropdownHeaderMenu.findAll(By.cssSelector("ul>li"));
-        // TODO Please look to the IDEA warning
-        Collection<String> serviceHeaderElementsTexts = servicesHeaderElements.stream().map(element -> element.getText()).collect(Collectors.toList());
-        assertTrue(serviceHeaderElementsTexts.containsAll(Arrays.asList(ServicesData.servicesMenuItems())));
+        servicesHeaderElements = servicesDropdownHeaderMenu.findAll(By.cssSelector("ul>li"));
+        serviceHeaderElementsTexts = servicesHeaderElements.stream().map(SelenideElement::getText).collect(Collectors.toList());
+        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
+        assertTrue(serviceHeaderElementsTexts.containsAll(serviceMenuItems));
     }
 
-    // TODO This method should be parametrized
+    // TODO This method should be parametrized - wasn't in the task
     public void checkServicesDropdownMenuInSidebar() {
         SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
+        Collection<SelenideElement> servicesSidebarElements;
+        Collection<String> servicesSidebarElementsTexts;
+        List<String> serviceMenuItems;
         servicesDropdownSidebarMenu.click();
-        Collection<SelenideElement> servicesSidebarElements = servicesDropdownSidebarMenu.findAll(By.cssSelector("ul>li"));
-        Collection<String> servicesSidebarElementsTexts = servicesSidebarElements.stream().map(element -> element.getText().toUpperCase()).collect(Collectors.toList());
-        assertTrue(servicesSidebarElementsTexts.containsAll(Arrays.asList(ServicesData.servicesMenuItems())));
+        servicesSidebarElements = servicesDropdownSidebarMenu.findAll(By.cssSelector("ul>li"));
+        servicesSidebarElementsTexts = servicesSidebarElements.stream().map(element -> element.getText().toUpperCase()).collect(Collectors.toList());
+        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
+        assertTrue(servicesSidebarElementsTexts.containsAll(serviceMenuItems));
     }
 
-    // TODO This method should be parametrized
+    // TODO This method should be parametrized - wasn't in the task
     public void openDifferentElementsPage() {
         servicesDropdownHeaderMenuItem.click();
         servicesDropdownHeaderMenuList.find(byText("Different elements")).click();
     }
 
-    // TODO This method should be parametrized
+    // TODO This method should be parametrized - wasn't in the task
     public void openDatesPage() {
         servicesDropdownHeaderMenuItem.click();
         servicesDropdownHeaderMenuList.find(byText("Dates")).click();

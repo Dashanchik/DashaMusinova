@@ -31,7 +31,7 @@ public class SelenideTestDatesPage extends SelenideBase {
     @Test
     public void datedPageSlidersCheck() {
         //1 Open test site by URL
-        // TODO Is toString required?
+        // TODO Is toString required? - yes, because Links are stored in String values
         open(Links.INDEX_PAGE.toString());
 
         //2 Assert Browser title

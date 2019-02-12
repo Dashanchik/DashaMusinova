@@ -13,9 +13,7 @@ import java.util.List;
 
 public class SelenideDatesPage extends SelenideBase {
 
-    // TODO Why is it public
-    public static final String PAGE_TITLE = "Dates";
-
+    // TODO Why is it public - deleted,  not needed for test - fixed
     @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8']>li")
     private List<SelenideElement> headerMenuItems;
 

@@ -17,9 +17,7 @@ import static org.testng.Assert.assertTrue;
 
 public class SelenideDifferentElementsPage extends SelenideBase {
 
-    // TODO Why is it public
-    public static final String PAGE_TITLE = "Different Elements";
-
+    // TODO Why is it public - not used, deleted - fixed
     @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8']>li")
     private List<SelenideElement> headerMenuItems;
 
