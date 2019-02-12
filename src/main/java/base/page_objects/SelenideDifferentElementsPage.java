@@ -17,6 +17,7 @@ import static org.testng.Assert.assertTrue;
 
 public class SelenideDifferentElementsPage extends SelenideBase {
 
+    // TODO Why is it public
     public static final String PAGE_TITLE = "Different Elements";
 
     @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8']>li")
