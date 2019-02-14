@@ -26,10 +26,11 @@ public class HomeworkTestForPO extends SeleniumBase {
     public void beforeMethod() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.get(Links.INDEX_PAGE.toString());
         indexPage = PageFactory.initElements(driver, IndexPage.class);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         driver.close();
     }
@@ -37,8 +38,6 @@ public class HomeworkTestForPO extends SeleniumBase {
     @Issue("BUG-0001")
     @Test
     public void hardAssertEpamGithubTest() {
-        //1 Open test site by URL
-        driver.get(Links.INDEX_PAGE.toString());
 
         //2 Assert Browser title
         indexPage.checkPageTitle(IndexPage.PAGE_TITLE);
