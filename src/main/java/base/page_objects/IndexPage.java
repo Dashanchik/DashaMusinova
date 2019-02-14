@@ -1,9 +1,11 @@
 package base.page_objects;
 
 import base.enums.*;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -47,7 +49,6 @@ public class IndexPage {
     @FindBy(css = "[src='https://epam.github.io/JDI/index.html']")
     private WebElement iFrame;
 
-    // TODO Why you decide use '@FindBy(id = "epam_logo")' here? - xpath used instead, fixed
     @FindBy(xpath = "//*[@id='epam_logo']")
     private WebElement epamLogo;
 
@@ -65,6 +66,7 @@ public class IndexPage {
         this.driver = driver;
     }
 
+    @Step("Login")
     public void login(Users user) {
         loginIcon.click();
         loginField.sendKeys(user.login);
@@ -72,8 +74,9 @@ public class IndexPage {
         submitButton.click();
         assertEquals(user.name, userName.getText());
     }
-
+    @Step("Open index page")
     public void open(Links url) {
+        PageFactory.initElements(driver, IndexPage.class);
         driver.navigate().to(url.value);
     }
 
@@ -90,7 +93,6 @@ public class IndexPage {
         assertEquals(navBarItems.get(1).getText(), NavBarMenuItems.CONTACT.toString());
         assertEquals(navBarItems.get(2).getText(), NavBarMenuItems.SERVICE.toString());
         assertEquals(navBarItems.get(3).getText(), NavBarMenuItems.METALS_COLORS.toString());
-
     }
 
     public void checkBenefitIcons() {
