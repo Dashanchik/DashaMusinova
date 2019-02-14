@@ -74,11 +74,6 @@ public class IndexPage {
         submitButton.click();
         assertEquals(user.name, userName.getText());
     }
-    @Step("Open index page")
-    public void open(Links url) {
-        PageFactory.initElements(driver, IndexPage.class);
-        driver.navigate().to(url.value);
-    }
 
     public void checkPageTitle(String pageTitle) {
         assertEquals(driver.getTitle(), pageTitle);

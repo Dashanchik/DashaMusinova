@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class HardAssertEpamGithubTest extends SeleniumBase {
 
     private WebDriver driver;
-    public IndexPage indexPage;
+    private IndexPage indexPage;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -30,9 +30,6 @@ public class HardAssertEpamGithubTest extends SeleniumBase {
 
     @Test
     public void hardAssertEpamGithubTest() {
-        //1 Open test site by URL
-        indexPage.open(Links.INDEX_PAGE);
-
         //2 Assert Browser title
         indexPage.checkPageTitle(IndexPage.PAGE_TITLE);
 

@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+
 @Story("My first story annotation")
 @Listeners(AllureTestListener.class)
 public class HomeworkTestForPO extends SeleniumBase {
@@ -30,7 +31,7 @@ public class HomeworkTestForPO extends SeleniumBase {
         indexPage = PageFactory.initElements(driver, IndexPage.class);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod
     public void afterMethod() {
         driver.close();
     }
