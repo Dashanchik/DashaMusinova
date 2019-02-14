@@ -2,7 +2,7 @@
 <suite name="TestNg Suite">
     <test name="Test 1">
         <classes>
-            <class name="hw3.HomeworkTestForPO"/>
+            <class name="hw4.SelenideDatesPageTest"/>
         </classes>
     </test>
 </suite>

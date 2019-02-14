@@ -2,6 +2,7 @@ package base.page_objects;
 
 import base.SelenideBase;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -53,20 +54,24 @@ public class SelenideDatesPage extends SelenideBase {
         action.dragAndDropBy(sliderHandle, -rangeToMove, 0).release().build().perform();
     }
 
+    @Step("Drag and drop left slider")
     public void dragAndDropLeftSlider(int leftHandleTargetPosition) {
         SelenideElement leftSliderHandle = getLeftSliderHandle();
         dragAndDropSlider(leftSliderHandle, leftHandleTargetPosition);
     }
 
+    @Step("Drag and drop right slider")
     public void dragAndDropRightSlider(int rightHandleTargetPosition) {
         SelenideElement rightSliderHandle = getRightSliderHandle();
         dragAndDropSlider(rightSliderHandle, rightHandleTargetPosition);
     }
 
+    @Step("Check log of the right slider")
     public void checkRightSliderLog(int rightSliderPosition, int rowIndex) {
         rightPanelLogWindow.findAll(By.tagName("li")).get(rowIndex).shouldHave(text("Range 2(To):" + rightSliderPosition + " link clicked"));
     }
 
+    @Step("Check log of the left slider")
     public void checkLeftSliderLog(int leftSliderPosition, int rowIndex) {
         rightPanelLogWindow.findAll(By.tagName("li")).get(rowIndex).shouldHave(text("Range 2(From):" + leftSliderPosition + " link clicked"));
     }

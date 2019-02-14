@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertEquals;
 
-public class SelenideTestServicePage extends SelenideBase {
+public class SelenideServicePageTest extends SelenideBase {
 
     private SelenideIndexPage indexPage;
     private SelenideDifferentElementsPage differentElementsPage;

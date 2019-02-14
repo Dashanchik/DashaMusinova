@@ -4,6 +4,7 @@ import base.DataProviders.ServiceMenuItems;
 import base.SelenideBase;
 import base.enums.*;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
@@ -83,6 +84,7 @@ public class SelenideIndexPage extends SelenideBase {
         page(this);
     }
 
+    @Step("Login")
     public void login(Users user) {
         loginIcon.click();
         loginField.sendKeys(user.login);
@@ -91,68 +93,8 @@ public class SelenideIndexPage extends SelenideBase {
         assertEquals(user.name, userName.getText());
     }
 
-    public void checkPageTitle(String pageTitle) {
-        $("title").shouldHave(text(pageTitle));
-    }
-
-    public void checkNavigationBarItems() {
-        assertEquals(headerMenuItems.size(), 4);
-        for (SelenideElement element : headerMenuItems) {
-            assertTrue(element.isDisplayed());
-        }
-        assertEquals(headerMenuItems.get(0).getText(), NavBarMenuItems.HOME.toString());
-        assertEquals(headerMenuItems.get(1).getText(), NavBarMenuItems.CONTACT.toString());
-        assertEquals(headerMenuItems.get(2).getText(), NavBarMenuItems.SERVICE.toString());
-        assertEquals(headerMenuItems.get(3).getText(), NavBarMenuItems.METALS_COLORS.toString());
-
-    }
-
-    public void checkBenefitIcons() {
-        assertEquals(benefitIcons.size(), 4);
-        for (SelenideElement element : benefitIcons) {
-            assertTrue(element.isDisplayed());
-        }
-    }
-
-    public void checkBenefitIconsText() {
-        assertEquals(benefitIconsText.get(0).getText(), BenefitIconsText.PRACTICE.toString());
-        assertEquals(benefitIconsText.get(1).getText(), BenefitIconsText.CUSTOM.toString());
-        assertEquals(benefitIconsText.get(2).getText(), BenefitIconsText.MULTI.toString());
-        assertEquals(benefitIconsText.get(3).getText(), BenefitIconsText.BASE.toString());
-    }
-
-    public void checkMainHeaderText() {
-        assertEquals(mainHeader.getText(), Headers.MAIN_HEADER.toString());
-    }
-
-    public void checkTextUnderHeader() {
-        assertEquals(textUnderHeader.getText(), Headers.TEXT_UNDER_HEADER.toString());
-    }
-
-    public void checkIFrameLogo() {
-        assertTrue(iFrame.isDisplayed());
-        switchTo().frame(iFrame);
-        assertTrue(epamLogo.isDisplayed());
-        switchTo().defaultContent();
-    }
-
-    public void checkSubHeaderText() {
-        assertEquals(subHeader.getText(), Headers.SUB_HEADER.toString());
-    }
-
-    public void checkSubHeaderLinkURL() {
-        assertEquals(subHeader.getAttribute("href"), Links.JDI_GITHUB.toString());
-    }
-
-    public void checkLeftMenuBarIsDisplayed() {
-        assertTrue(sidebarMenu.isDisplayed());
-    }
-
-    public void checkFooter() {
-        assertTrue(footer.isDisplayed());
-    }
-
     // TODO This method should be parametrized - wasn't in the task
+    @Step("Check that service dropdown is present in header menu")
     public void checkServicesDropdownMenuInHeader() {
         SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
         Collection<SelenideElement> servicesHeaderElements;
@@ -167,6 +109,7 @@ public class SelenideIndexPage extends SelenideBase {
     }
 
     // TODO This method should be parametrized - wasn't in the task
+    @Step("Check that service dropdown is present in sidebar menu")
     public void checkServicesDropdownMenuInSidebar() {
         SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
         Collection<SelenideElement> servicesSidebarElements;
@@ -180,12 +123,14 @@ public class SelenideIndexPage extends SelenideBase {
     }
 
     // TODO This method should be parametrized - wasn't in the task
+    @Step("Go to the Different elements page from header menu")
     public void openDifferentElementsPage() {
         servicesDropdownHeaderMenuItem.click();
         servicesDropdownHeaderMenuList.find(byText("Different elements")).click();
     }
 
     // TODO This method should be parametrized - wasn't in the task
+    @Step("Go to the Dates page from header menu")
     public void openDatesPage() {
         servicesDropdownHeaderMenuItem.click();
         servicesDropdownHeaderMenuList.find(byText("Dates")).click();

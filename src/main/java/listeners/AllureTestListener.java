@@ -4,9 +4,7 @@ package listeners;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
@@ -29,11 +27,6 @@ public class AllureTestListener extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        super.onTestFailure(tr);
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult tr) {
         makeScreenshot();
     }
 }

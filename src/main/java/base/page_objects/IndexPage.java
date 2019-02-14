@@ -75,10 +75,12 @@ public class IndexPage {
         assertEquals(user.name, userName.getText());
     }
 
+    @Step("Check page title")
     public void checkPageTitle(String pageTitle) {
         assertEquals(driver.getTitle(), pageTitle);
     }
 
+    @Step("Check navigation bar items")
     public void checkNavigationBarItems() {
         assertEquals(navBarItems.size(), 4);
         for (WebElement element : navBarItems) {
@@ -90,6 +92,7 @@ public class IndexPage {
         assertEquals(navBarItems.get(3).getText(), NavBarMenuItems.METALS_COLORS.toString());
     }
 
+    @Step("Check benefit icons")
     public void checkBenefitIcons() {
         assertEquals(benefitIcons.size(), 4);
         for(WebElement element : benefitIcons) {

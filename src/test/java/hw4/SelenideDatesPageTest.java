@@ -4,14 +4,20 @@ import base.SelenideBase;
 import base.enums.*;
 import base.page_objects.SelenideDatesPage;
 import base.page_objects.SelenideIndexPage;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import listeners.AllureTestListener;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertEquals;
 
-public class SelenideTestDatesPage extends SelenideBase {
+@Listeners(AllureTestListener.class)
+@Feature("Feature - Dates page elements")
+public class SelenideDatesPageTest extends SelenideBase {
 
     private SelenideIndexPage indexPage;
     private SelenideDatesPage datesPage;
@@ -28,10 +34,10 @@ public class SelenideTestDatesPage extends SelenideBase {
         close();
     }
 
+    @Story("Story - Dates page should have different elements")
     @Test
     public void datedPageSlidersCheck() {
         //1 Open test site by URL
-        // TODO Is toString required? - yes, because Links are stored in String values
         open(Links.INDEX_PAGE.toString());
 
         //2 Assert Browser title

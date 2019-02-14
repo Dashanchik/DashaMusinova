@@ -4,20 +4,14 @@ import base.SeleniumBase;
 import base.enums.Links;
 import base.enums.Users;
 import base.page_objects.IndexPage;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Story;
-import listeners.AllureTestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
-@Story("My first story annotation")
-@Listeners(AllureTestListener.class)
 public class HomeworkTestForPO extends SeleniumBase {
 
     private IndexPage indexPage;
@@ -36,7 +30,6 @@ public class HomeworkTestForPO extends SeleniumBase {
         driver.close();
     }
 
-    @Issue("BUG-0001")
     @Test
     public void hardAssertEpamGithubTest() {
 
