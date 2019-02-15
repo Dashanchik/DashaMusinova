@@ -1,8 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestNg Suite">
-    <test name="Test 1">
+    <test name="Test 1" parallel="classes" thread-count="3">
         <classes>
             <class name="hw4.SelenideDatesPageTest"/>
+            <class name="hw4.SelenideServicePageTest"/>
+            <class name="hw5.SelenideServicePageTest"/>
         </classes>
     </test>
 </suite>
