@@ -34,10 +34,6 @@ public class SelenideIndexPage extends SelenideBase {
     @FindBy(css = "[id='login-button']")
     private SelenideElement submitButton;
 
-    public SelenideElement getUserName() {
-        return userName;
-    }
-
     @FindBy(css = "[id='user-name']")
     private SelenideElement userName;
 
@@ -81,6 +77,11 @@ public class SelenideIndexPage extends SelenideBase {
         page(this);
     }
 
+    public String getUserName() {
+        return userName.getText();
+    }
+
+
     @Step("Login")
     public void login(Users user) {
         loginIcon.click();
@@ -90,46 +91,13 @@ public class SelenideIndexPage extends SelenideBase {
         assertEquals(user.name, userName.getText());
     }
 
-    // TODO This method should be parametrized - wasn't in the task
-    @Step("Check that service dropdown is present in header menu")
-    public void checkServicesDropdownMenuInHeader() {
-        SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
-        Collection<SelenideElement> servicesHeaderElements;
-        Collection<String> serviceHeaderElementsTexts;
-        List<String> serviceMenuItems;
-        // TODO Please look to the IDEA warning - fixed
-        servicesDropdownHeaderMenu.click();
-        servicesHeaderElements = servicesDropdownHeaderMenu.findAll(By.cssSelector("ul>li"));
-        serviceHeaderElementsTexts = servicesHeaderElements.stream().map(SelenideElement::getText).collect(Collectors.toList());
-        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
-        assertTrue(serviceHeaderElementsTexts.containsAll(serviceMenuItems));
+    public void login(String username, String password){
+        loginIcon.click();
+        loginField.sendKeys(username);
+        passwordField.sendKeys(password);
+        submitButton.click();
+        assertEquals(getUserName(), userName.getText());
     }
 
-    // TODO This method should be parametrized - wasn't in the task
-    @Step("Check that service dropdown is present in sidebar menu")
-    public void checkServicesDropdownMenuInSidebar() {
-        SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
-        Collection<SelenideElement> servicesSidebarElements;
-        Collection<String> servicesSidebarElementsTexts;
-        List<String> serviceMenuItems;
-        servicesDropdownSidebarMenu.click();
-        servicesSidebarElements = servicesDropdownSidebarMenu.findAll(By.cssSelector("ul>li"));
-        servicesSidebarElementsTexts = servicesSidebarElements.stream().map(element -> element.getText().toUpperCase()).collect(Collectors.toList());
-        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
-        assertTrue(servicesSidebarElementsTexts.containsAll(serviceMenuItems));
-    }
 
-    // TODO This method should be parametrized - wasn't in the task
-    @Step("Go to the Different elements page from header menu")
-    public void openDifferentElementsPage() {
-        servicesDropdownHeaderMenuItem.click();
-        servicesDropdownHeaderMenuList.find(byText("Different elements")).click();
-    }
-
-    // TODO This method should be parametrized - wasn't in the task
-    @Step("Go to the Dates page from header menu")
-    public void openDatesPage() {
-        servicesDropdownHeaderMenuItem.click();
-        servicesDropdownHeaderMenuList.find(byText("Dates")).click();
-    }
 }
