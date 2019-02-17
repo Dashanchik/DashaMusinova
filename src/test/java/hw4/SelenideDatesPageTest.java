@@ -45,7 +45,7 @@ public class SelenideDatesPageTest extends SelenideBase {
 
         //3 Perform login
         //4 Assert User name in the left-top side of screen that user is loggined
-        indexPage.login(Users.PITER);
+        indexPage.login(Users.PITER_CHAILOVSKII);
 
         //5 Open through the header menu Service -> Dates Page
         indexPage.openDatesPage();

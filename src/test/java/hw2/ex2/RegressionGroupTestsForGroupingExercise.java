@@ -35,7 +35,7 @@ public class RegressionGroupTestsForGroupingExercise extends SeleniumBase {
         driver.findElement(By.cssSelector("[id='login-button'")).click();
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
+        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER_CHAILOVSKII CHAILOVSKII");
 
         //5 Assert Browser title
         assertEquals(driver.getTitle(), "Home Page");
@@ -113,7 +113,7 @@ public class RegressionGroupTestsForGroupingExercise extends SeleniumBase {
         driver.findElement(By.cssSelector("[id='login-button'")).click();
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
+        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER_CHAILOVSKII CHAILOVSKII");
 
         //5 Assert Browser title
         assertEquals(driver.getTitle(), "Home Page");
@@ -191,7 +191,7 @@ public class RegressionGroupTestsForGroupingExercise extends SeleniumBase {
         driver.findElement(By.cssSelector("[id='login-button'")).click();
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
+        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER_CHAILOVSKII CHAILOVSKII");
 
         //5 Assert Browser title
         assertEquals(driver.getTitle(), "Home Page");

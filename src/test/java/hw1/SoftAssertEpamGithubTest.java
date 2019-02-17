@@ -40,7 +40,7 @@ public class SoftAssertEpamGithubTest extends SeleniumBase {
         driver.findElement(By.cssSelector("[id='login-button'")).click();
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        softAssert.assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
+        softAssert.assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER_CHAILOVSKII CHAILOVSKII");
 
         //5 Assert Browser title
         softAssert.assertEquals(driver.getTitle(), "Home Page");

@@ -16,4 +16,13 @@ public enum RadioControls {
     public String toString() {
         return value;
     }
+
+    public static RadioControls getRadioControlByTheName(String radioName) {
+        for (RadioControls radioControl : values()) {
+            if (radioControl.toString().equals(radioName)) {
+                return radioControl;
+            }
+        }
+        throw new IllegalArgumentException("Wrong Radio Control name");
+    }
 }

@@ -1,7 +1,7 @@
 package base.enums;
 
 public enum Users {
-    PITER("epam", "1234", "PITER CHAILOVSKII");
+    PITER_CHAILOVSKII("epam", "1234", "PITER CHAILOVSKII");
 
     public final String login;
     public final String password;
@@ -12,4 +12,14 @@ public enum Users {
         this.password = password;
         this.name = name;
     }
+
+    public static Users getUserByTheName(String username) throws IllegalArgumentException{
+        for (Users user : values()) {
+            if (user.name.equals(username)) {
+                return user;
+            }
+        }
+        throw new IllegalArgumentException("Wrong Username");
+    }
 }
+

@@ -42,6 +42,10 @@ public class SelenideDifferentElementsPage extends SelenideBase {
     @FindBy(css = "[class='panel-body-list logs']")
     private SelenideElement rightPanelLogWindow;
 
+    public SelenideDifferentElementsPage(){
+        page(this);
+    }
+
     public void checkDifferentElementsPageGUI() {
         assertEquals(checkboxes.size(), 4);
         assertEquals(checkboxes.stream().filter(box -> !box.isDisplayed()).collect(Collectors.toList()).size(), 0);

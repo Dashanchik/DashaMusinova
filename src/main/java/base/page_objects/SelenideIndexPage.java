@@ -1,6 +1,6 @@
 package base.page_objects;
 
-import base.DataProviders.ServiceMenuItems;
+import base.enums.ServiceMenuItems;
 import base.SelenideBase;
 import base.enums.*;
 import com.codeborne.selenide.SelenideElement;
@@ -13,11 +13,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.Selenide.switchTo;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -100,7 +98,6 @@ public class SelenideIndexPage extends SelenideBase {
         Collection<SelenideElement> servicesHeaderElements;
         Collection<String> serviceHeaderElementsTexts;
         List<String> serviceMenuItems;
-        // TODO Please look to the IDEA warning - fixed
         servicesDropdownHeaderMenu.click();
         servicesHeaderElements = servicesDropdownHeaderMenu.findAll(By.cssSelector("ul>li"));
         serviceHeaderElementsTexts = servicesHeaderElements.stream().map(SelenideElement::getText).collect(Collectors.toList());

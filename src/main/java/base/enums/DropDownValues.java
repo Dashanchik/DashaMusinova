@@ -17,4 +17,13 @@ public enum DropDownValues {
     public String toString() {
         return value;
     }
+
+    public static DropDownValues getDropDownByTheName(String dropDownName){
+        for (DropDownValues dropDown: values()){
+            if(dropDown.toString().equals(dropDownName)){
+                return dropDown;
+            }
+        }
+        throw new IllegalArgumentException("Wrong Dropdown item name");
+    }
 }

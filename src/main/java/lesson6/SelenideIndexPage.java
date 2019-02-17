@@ -1,11 +1,13 @@
 package lesson6;
 
-import base.DataProviders.ServiceMenuItems;
 import base.SelenideBase;
+import base.enums.BenefitIconsText;
+import base.enums.NavBarMenuItems;
+import base.enums.ServiceMenuItems;
 import base.enums.Users;
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Arrays;
@@ -81,8 +83,6 @@ public class SelenideIndexPage extends SelenideBase {
         return userName.getText();
     }
 
-
-    @Step("Login")
     public void login(Users user) {
         loginIcon.click();
         loginField.sendKeys(user.login);
@@ -91,7 +91,7 @@ public class SelenideIndexPage extends SelenideBase {
         assertEquals(user.name, userName.getText());
     }
 
-    public void login(String username, String password){
+    public void login(String username, String password) {
         loginIcon.click();
         loginField.sendKeys(username);
         passwordField.sendKeys(password);
@@ -99,5 +99,65 @@ public class SelenideIndexPage extends SelenideBase {
         assertEquals(getUserName(), userName.getText());
     }
 
+    public void checkBenefitIcons() {
+        assertEquals(benefitIcons.size(), 4);
+        for (WebElement element : benefitIcons) {
+            assertTrue(element.isDisplayed());
+        }
+    }
+
+    public void checkBenefitIconsText() {
+        assertEquals(benefitIconsText.get(0).getText(), BenefitIconsText.PRACTICE.toString());
+        assertEquals(benefitIconsText.get(1).getText(), BenefitIconsText.CUSTOM.toString());
+        assertEquals(benefitIconsText.get(2).getText(), BenefitIconsText.MULTI.toString());
+        assertEquals(benefitIconsText.get(3).getText(), BenefitIconsText.BASE.toString());
+    }
+
+    public SelenideElement getHeaderMenuItemByName(String menuItemName) {
+        for (SelenideElement headerMenuItem : headerMenuItems) {
+            if (headerMenuItem.getText().toUpperCase().contains(menuItemName.toUpperCase())) {
+                return headerMenuItem;
+            }
+        }
+        throw new IllegalArgumentException("Wrong menu item name");
+    }
+
+    private SelenideElement getServicesDropdownHeaderMenuItemByName(String itemName){
+        List<SelenideElement> servicesDropdownHeaderMenuItems = servicesDropdownHeaderMenuList.findAll(By.cssSelector("ul>li>a"));
+        for (SelenideElement servicesDropdownHeaderMenuItem1 : servicesDropdownHeaderMenuItems) {
+            if (servicesDropdownHeaderMenuItem1.getAttribute("innerHTML").trim().toUpperCase().equals(itemName.toUpperCase())) {
+                return servicesDropdownHeaderMenuItem1;
+            }
+        }
+        throw new IllegalArgumentException("Wrong Services dropdown menu item name");
+    }
+
+    public void checkServicesDropdownMenuInHeader() {
+        SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
+        Collection<SelenideElement> servicesHeaderElements;
+        Collection<String> serviceHeaderElementsTexts;
+        List<String> serviceMenuItems;
+        servicesDropdownHeaderMenu.click();
+        servicesHeaderElements = servicesDropdownHeaderMenu.findAll(By.cssSelector("ul>li"));
+        serviceHeaderElementsTexts = servicesHeaderElements.stream().map(SelenideElement::getText).collect(Collectors.toList());
+        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
+        assertTrue(serviceHeaderElementsTexts.containsAll(serviceMenuItems));
+    }
+
+    public void checkServicesDropdownMenuInSidebar() {
+        SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
+        Collection<SelenideElement> servicesSidebarElements;
+        Collection<String> servicesSidebarElementsTexts;
+        List<String> serviceMenuItems;
+        servicesDropdownSidebarMenu.click();
+        servicesSidebarElements = servicesDropdownSidebarMenu.findAll(By.cssSelector("ul>li"));
+        servicesSidebarElementsTexts = servicesSidebarElements.stream().map(element -> element.getText().toUpperCase()).collect(Collectors.toList());
+        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
+        assertTrue(servicesSidebarElementsTexts.containsAll(serviceMenuItems));
+    }
+
+    public void openPageFromServicesMenuItemDropdown(String pageName) {
+        getServicesDropdownHeaderMenuItemByName(pageName).click();
+    }
 
 }
