@@ -42,13 +42,13 @@ public class SelenideServicePageTest extends SelenideBase {
         indexPage.login(Users.PITER_CHAILOVSKII);
 
         //5 Click on "Service" subcategory in the header and check that drop down contains options
-        indexPage.checkServicesDropdownMenuInHeader();
+        indexPage.checkServicesDropdownMenuInHeader(ServiceMenuItems.values());
 
         //6 Click on Service subcategory in the left section and check that drop down contains options
-        indexPage.checkServicesDropdownMenuInSidebar();
+        indexPage.checkServicesDropdownMenuInSidebar(ServiceMenuItems.values());
 
         //7 Open through the header menu Service -> Different Elements Page
-        indexPage.openDifferentElementsPage();
+        indexPage.openPage("Different elements");
 
         //8 Check interface on Different elements page, it contains all needed elements
         differentElementsPage.checkDifferentElementsPageGUI();

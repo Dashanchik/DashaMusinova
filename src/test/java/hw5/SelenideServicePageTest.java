@@ -9,8 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class SelenideServicePageTest extends SelenideBase {
 
@@ -43,13 +42,13 @@ public class SelenideServicePageTest extends SelenideBase {
         indexPage.login(Users.PITER_CHAILOVSKII);
 
         //5 Click on "Service" subcategory in the header and check that drop down contains options
-        indexPage.checkServicesDropdownMenuInHeader();
+        indexPage.checkServicesDropdownMenuInHeader(ServiceMenuItems.values());
 
         //6 Click on Service subcategory in the left section and check that drop down contains options
-        indexPage.checkServicesDropdownMenuInSidebar();
+        indexPage.checkServicesDropdownMenuInSidebar(ServiceMenuItems.values());
 
         //7 Open through the header menu Service -> Different Elements Page
-        indexPage.openDifferentElementsPage();
+        indexPage.openPage("Different elements");
 
         //8 Check interface on Different elements page, it contains all needed elements
         differentElementsPage.checkDifferentElementsPageGUI();
@@ -93,6 +92,6 @@ public class SelenideServicePageTest extends SelenideBase {
         differentElementsPage.assertCheckboxDisabled(CheckboxesLabels.WIND);
 
         //19 assertion fail
-        assertTrue(false);
+        fail();
     }
 }

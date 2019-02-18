@@ -48,7 +48,7 @@ public class SelenideDatesPageTest extends SelenideBase {
         indexPage.login(Users.PITER_CHAILOVSKII);
 
         //5 Open through the header menu Service -> Dates Page
-        indexPage.openDatesPage();
+        indexPage.openPage("Dates");
 
         //6 Using drag-and-drop set Range sliders. left sliders - the most left position, right slider - the most rigth position
         datesPage.dragAndDropLeftSlider(0);

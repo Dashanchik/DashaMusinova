@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -91,9 +90,9 @@ public class SelenideIndexPage extends SelenideBase {
         assertEquals(user.name, userName.getText());
     }
 
-    // TODO This method should be parametrized - wasn't in the task
+    // TODO This method should be parametrized - fixed
     @Step("Check that service dropdown is present in header menu")
-    public void checkServicesDropdownMenuInHeader() {
+    public void checkServicesDropdownMenuInHeader(ServiceMenuItems[] items) {
         SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
         Collection<SelenideElement> servicesHeaderElements;
         Collection<String> serviceHeaderElementsTexts;
@@ -101,13 +100,13 @@ public class SelenideIndexPage extends SelenideBase {
         servicesDropdownHeaderMenu.click();
         servicesHeaderElements = servicesDropdownHeaderMenu.findAll(By.cssSelector("ul>li"));
         serviceHeaderElementsTexts = servicesHeaderElements.stream().map(SelenideElement::getText).collect(Collectors.toList());
-        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
+        serviceMenuItems = Arrays.stream(items).map(ServiceMenuItems::toString).collect(Collectors.toList());
         assertTrue(serviceHeaderElementsTexts.containsAll(serviceMenuItems));
     }
 
-    // TODO This method should be parametrized - wasn't in the task
+    // TODO This method should be parametrized - fixed
     @Step("Check that service dropdown is present in sidebar menu")
-    public void checkServicesDropdownMenuInSidebar() {
+    public void checkServicesDropdownMenuInSidebar(ServiceMenuItems[] items) {
         SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
         Collection<SelenideElement> servicesSidebarElements;
         Collection<String> servicesSidebarElementsTexts;
@@ -115,21 +114,14 @@ public class SelenideIndexPage extends SelenideBase {
         servicesDropdownSidebarMenu.click();
         servicesSidebarElements = servicesDropdownSidebarMenu.findAll(By.cssSelector("ul>li"));
         servicesSidebarElementsTexts = servicesSidebarElements.stream().map(element -> element.getText().toUpperCase()).collect(Collectors.toList());
-        serviceMenuItems = Arrays.stream(ServiceMenuItems.values()).map(ServiceMenuItems::toString).collect(Collectors.toList());
+        serviceMenuItems = Arrays.stream(items).map(ServiceMenuItems::toString).collect(Collectors.toList());
         assertTrue(servicesSidebarElementsTexts.containsAll(serviceMenuItems));
     }
 
-    // TODO This method should be parametrized - wasn't in the task
+    // TODO This method should be parametrized - fixed
     @Step("Go to the Different elements page from header menu")
-    public void openDifferentElementsPage() {
+    public void openPage(String pageName) {
         servicesDropdownHeaderMenuItem.click();
-        servicesDropdownHeaderMenuList.find(byText("Different elements")).click();
-    }
-
-    // TODO This method should be parametrized - wasn't in the task
-    @Step("Go to the Dates page from header menu")
-    public void openDatesPage() {
-        servicesDropdownHeaderMenuItem.click();
-        servicesDropdownHeaderMenuList.find(byText("Dates")).click();
+        servicesDropdownHeaderMenuList.find(byText(pageName)).click();
     }
 }

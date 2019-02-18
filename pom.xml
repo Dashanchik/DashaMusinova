@@ -78,6 +78,12 @@
             <version>${aspectj.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light-html</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
     </dependencies>
 
     <build>

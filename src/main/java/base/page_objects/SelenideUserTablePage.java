@@ -52,27 +52,22 @@ public class SelenideUserTablePage extends SelenideBase {
     }
 
     public void checkTheTableContents(List<List<String>> data) {
-        assert userTable.find(By.xpath("//tbody/tr[1]/th[1]")).getText().equals(data.get(0).get(0));
-        assert userTable.find(By.xpath("//tbody/tr[1]/th[3]")).getText().equals(data.get(0).get(1));
-        assert userTable.find(By.xpath("//tbody/tr[1]/th[4]")).getText().equals(data.get(0).get(2));
-        assert userTable.find(By.xpath("//tbody/tr[2]/td[1]")).getText().equals(data.get(1).get(0));
-        assert userTable.find(By.xpath("//tbody/tr[2]/td[3]")).getText().equals(data.get(1).get(1));
-        assert userTable.find(By.xpath("//tbody/tr[2]/td[4]/div/span")).getText().equals(data.get(1).get(2));
-        assert userTable.find(By.xpath("//tbody/tr[3]/td[1]")).getText().equals(data.get(2).get(0));
-        assert userTable.find(By.xpath("//tbody/tr[3]/td[3]")).getText().equals(data.get(2).get(1));
-        assert userTable.find(By.xpath("//tbody/tr[3]/td[4]/div/span")).getText().equals(data.get(2).get(2));
-        assert userTable.find(By.xpath("//tbody/tr[4]/td[1]")).getText().equals(data.get(3).get(0));
-        assert userTable.find(By.xpath("//tbody/tr[4]/td[3]")).getText().equals(data.get(3).get(1));
-        assert userTable.find(By.xpath("//tbody/tr[4]/td[4]/div/span")).getText().equals(data.get(3).get(2));
-        assert userTable.find(By.xpath("//tbody/tr[5]/td[1]")).getText().equals(data.get(4).get(0));
-        assert userTable.find(By.xpath("//tbody/tr[5]/td[3]")).getText().equals(data.get(4).get(1));
-        assert userTable.find(By.xpath("//tbody/tr[5]/td[4]/div/span")).getText().replace("\n", " ").contains(data.get(4).get(2));
-        assert userTable.find(By.xpath("//tbody/tr[6]/td[1]")).getText().equals(data.get(5).get(0));
-        assert userTable.find(By.xpath("//tbody/tr[6]/td[3]")).getText().equals(data.get(5).get(1));
-        assert userTable.find(By.xpath("//tbody/tr[6]/td[4]/div/span")).getText().replace("\n", " ").equals(data.get(5).get(2));
-        assert userTable.find(By.xpath("//tbody/tr[7]/td[1]")).getText().equals(data.get(6).get(0));
-        assert userTable.find(By.xpath("//tbody/tr[7]/td[3]")).getText().equals(data.get(6).get(1));
-        assert userTable.find(By.xpath("//tbody/tr[7]/td[4]/div/span")).getText().replace("\n", " ").equals(data.get(6).get(2));
+        List<SelenideElement> actualRowsOfElements = userTable.findAll(By.tagName("tr"));
+        List<String> testTableFirstRow = data.get(0);
+        List<String> actualTableHeaderRow = actualRowsOfElements.get(0).findAll(By.tagName("th")).stream().map(SelenideElement::getText).collect(Collectors.toList());
+        validateTableRowsData(testTableFirstRow, actualTableHeaderRow);
+
+        for (int index = 1; index < data.size(); index++) {
+            List<String> testTableRow = data.get(index);
+            List<String> actualTableRow = actualRowsOfElements.get(index).findAll(By.tagName("td")).stream().map(SelenideElement::getText).collect(Collectors.toList());
+            validateTableRowsData(testTableRow, actualTableRow);
+        }
+    }
+
+    private void validateTableRowsData(List<String> testTableRow, List<String> actualTableRow) {
+        assert testTableRow.get(0).equals(actualTableRow.get(0));
+        assert testTableRow.get(1).equals(actualTableRow.get(2));
+        assert testTableRow.get(2).equals(actualTableRow.get(3));
     }
 
     public void seleckVipCheckboxForUser(String userName) {

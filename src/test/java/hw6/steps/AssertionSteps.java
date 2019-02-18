@@ -114,33 +114,10 @@ public class AssertionSteps {
         new SelenideUserTablePage().checkRightPanelLog(numberOfRowInLog, textInLog);
     }
 
-//    public class UserInfo {
-//        public String number;
-//        public String type;
-//        public String user;
-//        public String description;
-//
-//        public UserInfo(String number, String type, String user, String description) {
-//            this.number = number;
-//            this.type = type;
-//            this.user = user;
-//            this.description = description;
-//        }
-//    }
-
     @And("^User table contains following values:$")
     public void userTableContainsFollowingValues(DataTable userTable) {
         List<List<String>> data = userTable.raw();
         new SelenideUserTablePage().checkTheTableContents(data);
-//        List<List<String>> userTableHTML = new SelenideUserTablePage().userTable.findAll();
-//        List<UserInfo> users = new ArrayList<>();
-//        users = userTable.asList(UserInfo.class);
-//        for (UserInfo user : users) {
-//            System.out.println("The number is: " + user.number);
-//            System.out.println("The type is: " + user.type);
-//            System.out.println("The name is: " + user.user);
-//            System.out.println("The description is: " + user.description);
-//        }
     }
 
     @Then("^droplist contains values$")
