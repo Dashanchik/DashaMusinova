@@ -52,6 +52,7 @@ public class SelenideUserTablePage extends SelenideBase {
     }
 
     public void checkTheTableContents(List<List<String>> data) {
+        // TODO Why List<SelenideElement>???
         List<SelenideElement> actualRowsOfElements = userTable.findAll(By.tagName("tr"));
         List<String> testTableFirstRow = data.get(0);
         List<String> actualTableHeaderRow = actualRowsOfElements.get(0).findAll(By.tagName("th")).stream().map(SelenideElement::getText).collect(Collectors.toList());
@@ -65,6 +66,7 @@ public class SelenideUserTablePage extends SelenideBase {
     }
 
     private void validateTableRowsData(List<String> testTableRow, List<String> actualTableRow) {
+        // TODO assert???
         assert testTableRow.get(0).equals(actualTableRow.get(0));
         assert testTableRow.get(1).equals(actualTableRow.get(2));
         assert testTableRow.get(2).equals(actualTableRow.get(3));

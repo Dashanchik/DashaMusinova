@@ -19,9 +19,11 @@ public class AssertionSteps {
 
     @Then("^User name should be as '([^\"]*)'$")
     public void userNameShouldBe(String username) {
+        // TODO Why you don't use Assert?
         assert new SelenideIndexPage().getUserName().equals(username);
     }
 
+    // TODO It will be better if you change all @And to @Then
     @And("^I am on the '([^\"]*)'$")
     public void iAmOnTheHomePage(String pageTitle) {
         assert pageTitle.equalsIgnoreCase(getWebDriver().getTitle());
@@ -60,27 +62,32 @@ public class AssertionSteps {
 
     @And("^I can select checkbox '([^\"]*)' and the selection is logged$")
     public void iCanSelectCheckboxesWINDAndWATERAndTheyReLogged(String checboxLabel) {
+        // TODO IF enum is one word you could send it as parameter into method
         new SelenideDifferentElementsPage().checkCheckboxesEnableActionLog(getCheckboxByTheName(checboxLabel));
     }
 
     @And("^I can select radiobutton '([^\"]*)' and the selection is logged$")
     public void iCanSelectRadiobuttonAndTheSelectionIsLogged(String radioButtonLabel) {
+        // TODO IF enum is one word you could send it as parameter into method
         new SelenideDifferentElementsPage().checkRadioControlsActionLog(getRadioControlByTheName(radioButtonLabel));
 
     }
 
     @And("^I can select dropdown '([^\"]*)'$")
     public void iCanSelectDropdownYELLOW(String dropdownName) {
+        // TODO IF enum is one word you could send it as parameter into method
         new SelenideDifferentElementsPage().selectDropdownItem(getDropDownByTheName(dropdownName));
     }
 
     @And("^I can unselect the checkbox '([^\"]*)' and the selection is logged$")
     public void iCanUnselectTheCheckboxAndTheSelectionIsLogged(CheckboxesLabels checkboxLabel) {
+        // TODO IF enum is one word you could send it as parameter into method
         new SelenideDifferentElementsPage().checkCheckboxesDisableActionLog(checkboxLabel);
     }
 
     @Then("^'([^\"]*)' page is opened$")
     public void pageIsOpened(String pageName) {
+        // TODO Why you use hardcode here?
         assert pageName.equals(SelenideUserTablePage.PAGE_TITLE);
     }
 
@@ -121,6 +128,7 @@ public class AssertionSteps {
     }
 
     @Then("^droplist contains values$")
+    // TODO List<String> could be used instead of DataTable
     public void droplistContainsValues(DataTable dropDownItems){
     List<String> listOfDDownItems = dropDownItems.asList(String.class);
     new SelenideUserTablePage().checkTheDropDownUserTypeItems(listOfDDownItems);

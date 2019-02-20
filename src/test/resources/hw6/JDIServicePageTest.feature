@@ -1,4 +1,8 @@
 Feature: User can login to EPAM JDI site and sees the Home page
+
+  # TODO Where is Then?
+  # TODO I can select checkbox 'Wind' and the selection is logged - this is not good idea
+  #     combine action and assertion steps into one
   @HomePageTest
   Scenario: Login as a user to EPAM JDI site
     Given I open EPAM JDI page
