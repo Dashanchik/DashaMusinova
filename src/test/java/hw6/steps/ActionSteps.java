@@ -1,10 +1,15 @@
 package hw6.steps;
 
 import base.enums.Users;
+import base.page_objects.SelenideDifferentElementsPage;
 import base.page_objects.SelenideUserTablePage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lesson6.SelenideIndexPage;
+
+import static base.enums.CheckboxesLabels.getCheckboxByTheName;
 
 public class ActionSteps {
 
@@ -35,8 +40,14 @@ public class ActionSteps {
         new SelenideUserTablePage().seleckVipCheckboxForUser(userName);
     }
 
-    @When("^I click on dropdown in column Type for user Roman$")
-    public void iClickOnDropdownInColumnTypeForUserRoman() {
-        new SelenideUserTablePage().clickDropdownOfUser();
+    @When("^I click on dropdown in column Type for user '([^\"]*)'$")
+    public void iClickOnDropdownInColumnTypeForUserRoman(String username) {
+        new SelenideUserTablePage().clickDropdownOfUser(username);
+    }
+
+
+    @When("^I select checkbox '([^\"]*)'$")
+    public void iSelectCheckboxWind(String checkboxLabel) {
+        new SelenideDifferentElementsPage().changeCheckboxState(checkboxLabel);
     }
 }

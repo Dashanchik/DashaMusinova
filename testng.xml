@@ -3,8 +3,8 @@
     <test name="Test 1" parallel="methods" thread-count="3">
         <classes>
             <class name="hw4.SelenideDatesPageTest"/>
-            <class name="hw4.SelenideServicePageTest"/>
-            <class name="hw5.SelenideServicePageTest"/>
+            <!--<class name="hw4.SelenideServicePageTest"/>-->
+            <!--<class name="hw5.SelenideServicePageTest"/>-->
         </classes>
     </test>
 </suite>

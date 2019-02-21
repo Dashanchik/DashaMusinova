@@ -1,7 +1,6 @@
 package base.enums;
 
 public enum ServiceMenuItems {
-    //TODO - change table for tables with pages - it's TABLE WITH PAGES on GUI, if change it to TABLES test will fail
     SUPPORT("SUPPORT"),
     DATES("DATES"),
     COMPLEX_TABLE("COMPLEX TABLE"),

@@ -17,7 +17,6 @@ import static org.testng.Assert.assertTrue;
 
 public class SelenideDifferentElementsPage extends SelenideBase {
 
-    // TODO Why is it public - not used, deleted - fixed
     @FindBy(css = "[class='uui-navigation nav navbar-nav m-l8']>li")
     private List<SelenideElement> headerMenuItems;
 
@@ -64,22 +63,20 @@ public class SelenideDifferentElementsPage extends SelenideBase {
         assertTrue($("[name^='navigation-sidebar']").isDisplayed());
     }
 
-    private void changeCheckboxState(CheckboxesLabels label) {
-        SelenideElement checkbox = checkboxes.stream().filter(box -> box.getText().equalsIgnoreCase(label.toString())).findFirst().get();
+    public void changeCheckboxState(String label) {
+        SelenideElement checkbox = checkboxes.stream().filter(box -> box.getText().equalsIgnoreCase(label)).findFirst().get();
         checkbox.click();
     }
 
-    public void checkCheckboxesEnableActionLog(CheckboxesLabels label) {
-        changeCheckboxState(label);
-        rightPanelLogWindow.find(By.tagName("li")).shouldHave(text(label.toString() + ": condition changed to true"));
+    public void checkCheckboxesEnabledActionLog(String label) {
+        rightPanelLogWindow.find(By.tagName("li")).shouldHave(text(label + ": condition changed to true"));
     }
 
-    public void checkCheckboxesDisableActionLog(CheckboxesLabels label) {
-        changeCheckboxState(label);
-        rightPanelLogWindow.find(By.tagName("li")).shouldHave(text(label.toString() + ": condition changed to false"));
+    public void checkCheckboxesDisabledActionLog(String label) {
+        rightPanelLogWindow.find(By.tagName("li")).shouldHave(text(label + ": condition changed to false"));
     }
 
-    public void selectRadio(RadioControls label) {
+    private void selectRadio(RadioControls label) {
         SelenideElement radioControl = radioControls.stream().filter(box -> box.getText().equalsIgnoreCase(label.toString())).findFirst().get();
         radioControl.click();
     }

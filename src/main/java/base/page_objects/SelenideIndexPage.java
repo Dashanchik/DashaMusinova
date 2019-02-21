@@ -90,7 +90,6 @@ public class SelenideIndexPage extends SelenideBase {
         assertEquals(user.name, userName.getText());
     }
 
-    // TODO This method should be parametrized - fixed
     @Step("Check that service dropdown is present in header menu")
     public void checkServicesDropdownMenuInHeader(ServiceMenuItems[] items) {
         SelenideElement servicesDropdownHeaderMenu = headerMenuItems.get(2);
@@ -104,7 +103,6 @@ public class SelenideIndexPage extends SelenideBase {
         assertTrue(serviceHeaderElementsTexts.containsAll(serviceMenuItems));
     }
 
-    // TODO This method should be parametrized - fixed
     @Step("Check that service dropdown is present in sidebar menu")
     public void checkServicesDropdownMenuInSidebar(ServiceMenuItems[] items) {
         SelenideElement servicesDropdownSidebarMenu = sidebarMenu.find(By.cssSelector("[index='3']"));
@@ -118,7 +116,6 @@ public class SelenideIndexPage extends SelenideBase {
         assertTrue(servicesSidebarElementsTexts.containsAll(serviceMenuItems));
     }
 
-    // TODO This method should be parametrized - fixed
     @Step("Go to the Different elements page from header menu")
     public void openPage(String pageName) {
         servicesDropdownHeaderMenuItem.click();

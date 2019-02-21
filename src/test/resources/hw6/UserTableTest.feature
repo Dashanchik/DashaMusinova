@@ -21,9 +21,9 @@ Feature: User can login to EPAM JDI site and sees the Home page
       | 6      | Giovanni Rovelli | Hulk some description            |
     When I select vip checkbox for 'Sergey Ivan'
     Then 1 log row has 'Vip: condition changed to true' text in log section
-  # TODO User could be parametrized
-    When I click on dropdown in column Type for user Roman
-    Then droplist contains values
+  # TODO User could be parametrized - fixed
+    When I click on dropdown in column Type for user 'Roman'
+    Then 'Roman' droplist contains values
       | Admin   |
       | User    |
       | Manager |

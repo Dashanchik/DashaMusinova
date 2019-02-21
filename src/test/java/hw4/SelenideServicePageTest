@@ -31,7 +31,6 @@ public class SelenideServicePageTest extends SelenideBase {
     @Test
     public void servicePageInterfaceCheck() {
         //1 Open test site by URL
-        // TODO Is toString required? - yes, because Links are stored in String values
         open(Links.INDEX_PAGE.toString());
 
         //2 Assert Browser title
@@ -61,10 +60,10 @@ public class SelenideServicePageTest extends SelenideBase {
 
         //11 Select checkboxes Water and Wind
         //12 Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
-        differentElementsPage.checkCheckboxesEnableActionLog(CheckboxesLabels.EARTH);
-        differentElementsPage.checkCheckboxesEnableActionLog(CheckboxesLabels.WATER);
-        differentElementsPage.checkCheckboxesEnableActionLog(CheckboxesLabels.FIRE);
-        differentElementsPage.checkCheckboxesEnableActionLog(CheckboxesLabels.WIND);
+        differentElementsPage.checkCheckboxesEnabledActionLog(CheckboxesLabels.EARTH);
+        differentElementsPage.checkCheckboxesEnabledActionLog(CheckboxesLabels.WATER);
+        differentElementsPage.checkCheckboxesEnabledActionLog(CheckboxesLabels.FIRE);
+        differentElementsPage.checkCheckboxesEnabledActionLog(CheckboxesLabels.WIND);
 
         //13 Select radio Selen
         differentElementsPage.selectRadio(RadioControls.SELEN);
@@ -86,8 +85,8 @@ public class SelenideServicePageTest extends SelenideBase {
 
         //17 Unselect and assert checkboxes
         //18 Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox. 
-        differentElementsPage.checkCheckboxesDisableActionLog(CheckboxesLabels.WATER);
-        differentElementsPage.checkCheckboxesDisableActionLog(CheckboxesLabels.WIND);
+        differentElementsPage.checkCheckboxesDisabledActionLog(CheckboxesLabels.WATER);
+        differentElementsPage.checkCheckboxesDisabledActionLog(CheckboxesLabels.WIND);
         differentElementsPage.assertCheckboxDisabled(CheckboxesLabels.WATER);
         differentElementsPage.assertCheckboxDisabled(CheckboxesLabels.WIND);
     }

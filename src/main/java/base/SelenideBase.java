@@ -12,6 +12,5 @@ public abstract class SelenideBase {
         Configuration.timeout = 5000;
         Configuration.pollingInterval = 300;
         Configuration.startMaximized = true;
-        // TODO Why you use this configuration? - made experiment, forgot to delete - fixed
     }
 }
