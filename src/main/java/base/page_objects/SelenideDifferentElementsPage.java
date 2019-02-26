@@ -64,6 +64,7 @@ public class SelenideDifferentElementsPage extends SelenideBase {
     }
 
     public void changeCheckboxState(String label) {
+        // TODO Why you decide use stream API?
         SelenideElement checkbox = checkboxes.stream().filter(box -> box.getText().equalsIgnoreCase(label)).findFirst().get();
         checkbox.click();
     }
