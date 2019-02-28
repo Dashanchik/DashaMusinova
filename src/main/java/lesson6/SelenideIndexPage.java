@@ -107,6 +107,8 @@ public class SelenideIndexPage extends SelenideBase {
     }
 
     public void checkBenefitIconsText() {
+        // TODO It is not good idea incapsulate text into method.
+        // TODO This is not BDD style
         assertEquals(benefitIconsText.get(0).getText(), BenefitIconsText.PRACTICE.toString());
         assertEquals(benefitIconsText.get(1).getText(), BenefitIconsText.CUSTOM.toString());
         assertEquals(benefitIconsText.get(2).getText(), BenefitIconsText.MULTI.toString());

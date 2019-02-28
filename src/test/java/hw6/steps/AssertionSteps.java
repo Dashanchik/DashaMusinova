@@ -17,11 +17,9 @@ public class AssertionSteps {
 
     @Then("^User name should be as '([^\"]*)'$")
     public void userNameShouldBe(String username) {
-        // TODO Why you don't use Assert? - fixed, changed to assertThat
          assertThat("Username is correct", new SelenideIndexPage().getUserName().equals(username));
     }
 
-    // TODO It will be better if you change all @And to @Then - fixed
     @Then("^I am on the '([^\"]*)'$")
     public void iAmOnTheHomePage(String pageTitle) {
         assertThat("Page title is correct", pageTitle.equalsIgnoreCase(getWebDriver().getTitle()));
@@ -60,20 +58,17 @@ public class AssertionSteps {
 
         @Then("^I can select radiobutton '([^\"]*)' and the selection is logged$")
     public void iCanSelectRadiobuttonAndTheSelectionIsLogged(String radioButtonLabel) {
-        // TODO IF enum is one word you could send it as parameter into method - it's more convenient to the Cucumber feature file User to write it as a simple line, not using Caps (as in Enum), I'd prefer not to change it
         new SelenideDifferentElementsPage().checkRadioControlsActionLog(getRadioControlByTheName(radioButtonLabel));
 
     }
 
     @Then("^I can select dropdown '([^\"]*)'$")
     public void iCanSelectDropdownYELLOW(String dropdownName) {
-        // TODO IF enum is one word you could send it as parameter into method - it's more convenient to the Cucumber feature file User to write it as a simple line, not using Caps (as in Enum), I'd prefer not to change it
         new SelenideDifferentElementsPage().selectDropdownItem(getDropDownByTheName(dropdownName));
     }
 
     @Then("^'([^\"]*)' page is opened$")
     public void pageIsOpened(String pageName) {
-        // TODO Why you use hardcode here? - the test validates the page name from the PO SelenideUserTablePage. In case the name will change, it'd be necessary to change it in the PO too
         assert pageName.equals(SelenideUserTablePage.PAGE_TITLE);
     }
 
@@ -114,7 +109,6 @@ public class AssertionSteps {
     }
 
     @Then("^'([^\"]*)' droplist contains values$")
-    // TODO List<String> could be used instead of DataTable - fixed
     public void droplistContainsValues(String username, List<String> dropDownItems){
     new SelenideUserTablePage().checkTheDropDownUserTypeItems(username, dropDownItems);
     }
