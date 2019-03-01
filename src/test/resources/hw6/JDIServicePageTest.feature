@@ -19,17 +19,13 @@ Feature: User can login to EPAM JDI site and sees the Home page
     And I see the left section
     And I see the right section
     When I select checkbox 'Wind'
-#    Then The selection of 'Wind' is logged
     And I select checkbox 'Water'
     # TODO All steps which describe check logger could be combined into one - fixed
-#    Then The selection of 'Water' is logged
     # TODO Why is it combined into one step - fixed
     And I can select radiobutton 'Selen'
     And I can select dropdown 'Yellow'
     And I select checkbox 'Water'
-#    Then The deselection of 'Water' is logged
     And I select checkbox 'Wind'
-#    Then The deselection of 'Wind' is logged
     Then I see following strings in the log
       | Wind: condition changed to false  |
       | Water: condition changed to false |
