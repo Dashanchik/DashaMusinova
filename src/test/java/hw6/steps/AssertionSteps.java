@@ -17,7 +17,7 @@ public class AssertionSteps {
 
     @Then("^User name should be as '([^\"]*)'$")
     public void userNameShouldBe(String username) {
-         assertThat("Username is correct", new SelenideIndexPage().getUserName().equals(username));
+        assertThat("Username is correct", new SelenideIndexPage().getUserName().equals(username));
     }
 
     @Then("^I am on the '([^\"]*)'$")
@@ -26,9 +26,9 @@ public class AssertionSteps {
     }
 
     @Then("^I see the pictures and texts underneath them$")
-    public void iSeeThePicturesAndTextsUnderneathThem() {
+    public void iSeeThePicturesAndTextsUnderneathThem(List<String> textUnderPictures) {
         new SelenideIndexPage().checkBenefitIcons();
-        new SelenideIndexPage().checkBenefitIconsText();
+        new SelenideIndexPage().checkBenefitIconsText(textUnderPictures);
     }
 
     @Then("^There's Service Dropdown with the correct items in the header menu$")
@@ -41,9 +41,9 @@ public class AssertionSteps {
         new SelenideIndexPage().checkServicesDropdownMenuInSidebar();
     }
 
-    @Then("^I see all needed elements on the Different Elements Page$")
-    public void seeAllNeededElementsOnTheDifferentElementsPage() {
-        new SelenideDifferentElementsPage().checkDifferentElementsPageGUI();
+    @Then("^I see (\\d+) checkboxes, (\\d+) radios, (\\d+) buttons and (\\d+) dropdown on the Different Elements Page$")
+    public void seeAllNeededElementsOnTheDifferentElementsPage(int totalCheckboxes, int totalRadios, int totalButtons, int totalDropdowns) {
+        new SelenideDifferentElementsPage().checkDifferentElementsPageGUI(totalCheckboxes, totalRadios, totalDropdowns, totalButtons);
     }
 
     @Then("^I see the left section$")
@@ -56,10 +56,9 @@ public class AssertionSteps {
         new SelenideDifferentElementsPage().assertRightSectionDisplayed();
     }
 
-        @Then("^I can select radiobutton '([^\"]*)' and the selection is logged$")
+    @Then("^I can select radiobutton '([^\"]*)'$")
     public void iCanSelectRadiobuttonAndTheSelectionIsLogged(String radioButtonLabel) {
-        new SelenideDifferentElementsPage().checkRadioControlsActionLog(getRadioControlByTheName(radioButtonLabel));
-
+        new SelenideDifferentElementsPage().selectRadio(getRadioControlByTheName(radioButtonLabel));
     }
 
     @Then("^I can select dropdown '([^\"]*)'$")
@@ -109,8 +108,8 @@ public class AssertionSteps {
     }
 
     @Then("^'([^\"]*)' droplist contains values$")
-    public void droplistContainsValues(String username, List<String> dropDownItems){
-    new SelenideUserTablePage().checkTheDropDownUserTypeItems(username, dropDownItems);
+    public void droplistContainsValues(String username, List<String> dropDownItems) {
+        new SelenideUserTablePage().checkTheDropDownUserTypeItems(username, dropDownItems);
     }
 
     @Then("^The selection of '([^\"]*)' is logged$")
@@ -122,5 +121,10 @@ public class AssertionSteps {
     @Then("^The deselection of '([^\"]*)' is logged$")
     public void theDeselectionOfWaterIsLogged(String label) {
         new SelenideDifferentElementsPage().checkCheckboxesDisabledActionLog(label);
+    }
+
+    @Then("^I see following strings in the log$")
+    public void iSeeFollowingStringsInTheLog(List<String> logText) {
+        new SelenideDifferentElementsPage().checkActionLog(logText);
     }
 }

@@ -1,6 +1,7 @@
-package base.jdi.lesson1;
+package base.jdi;
 
-import base.jdi.lesson1.pages.IndexPageJdi;
+import base.jdi.pages.IndexPageJdi;
+import base.page_objects.MetalsAndColorsPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 
@@ -9,4 +10,7 @@ public class JdiSite {
 
     @Url("index.html")
     public static IndexPageJdi indexPageJdi;
+
+    @Url("metals-colors.html")
+    public static MetalsAndColorsPage metalsAndColorsPage;
 }

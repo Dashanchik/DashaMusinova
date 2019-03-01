@@ -2,6 +2,7 @@ package base.page_objects;
 
 import base.SelenideBase;
 import base.enums.*;
+import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
@@ -26,14 +27,17 @@ public class SelenideDifferentElementsPage extends SelenideBase {
     @FindBy(css = "[class^='footer']")
     private SelenideElement footer;
 
+    @FindBy(css = "[class='checkbox-row']")
+    private SelenideElement checkboxesRow;
+
     @FindBy(css = "[class='label-checkbox']")
     private List<SelenideElement> checkboxes;
 
     @FindBy(css = "[class='label-radio']")
     private List<SelenideElement> radioControls;
 
-    @FindBy(css = "[class='colors']>select")
-    private SelenideElement dropdownColors;
+    @FindBy(css = "select")
+    private List<SelenideElement> dropdownColors;
 
     @FindBy(css = "[class='uui-button']")
     private List<SelenideElement> buttons;
@@ -41,17 +45,18 @@ public class SelenideDifferentElementsPage extends SelenideBase {
     @FindBy(css = "[class='panel-body-list logs']")
     private SelenideElement rightPanelLogWindow;
 
-    public SelenideDifferentElementsPage(){
+    public SelenideDifferentElementsPage() {
         page(this);
     }
 
-    public void checkDifferentElementsPageGUI() {
-        assertEquals(checkboxes.size(), 4);
+    public void checkDifferentElementsPageGUI(int checkboxesCount, int radiosCount, int dropdownsCount, int buttonsCount) {
+        assertEquals(checkboxes.size(), checkboxesCount);
         assertEquals(checkboxes.stream().filter(box -> !box.isDisplayed()).collect(Collectors.toList()).size(), 0);
-        assertEquals(radioControls.size(), 4);
+        assertEquals(radioControls.size(), radiosCount);
         assertEquals(radioControls.stream().filter(control -> !control.isDisplayed()).collect(Collectors.toList()).size(), 0);
-        assertTrue(dropdownColors.isDisplayed());
-        assertEquals(buttons.size(), 2);
+        assertEquals(dropdownColors.size(), dropdownsCount);
+        assertTrue(dropdownColors.get(0).isDisplayed());
+        assertEquals(buttons.size(), buttonsCount);
         assertEquals(buttons.stream().filter(button -> !button.isDisplayed()).collect(Collectors.toList()).size(), 0);
     }
 
@@ -64,9 +69,10 @@ public class SelenideDifferentElementsPage extends SelenideBase {
     }
 
     public void changeCheckboxState(String label) {
-        // TODO Why you decide use stream API?
-        SelenideElement checkbox = checkboxes.stream().filter(box -> box.getText().equalsIgnoreCase(label)).findFirst().get();
-        checkbox.click();
+        // TODO Why you decide use stream API? - because it's convenient - redid the other way
+//        SelenideElement checkbox = checkboxes.stream().filter(box -> box.getText().equalsIgnoreCase(label)).findFirst().get();
+//        checkbox.click();
+        checkboxesRow.find(new Selectors.ByText(label)).click();
     }
 
     public void checkCheckboxesEnabledActionLog(String label) {
@@ -77,18 +83,23 @@ public class SelenideDifferentElementsPage extends SelenideBase {
         rightPanelLogWindow.find(By.tagName("li")).shouldHave(text(label + ": condition changed to false"));
     }
 
-    private void selectRadio(RadioControls label) {
+    public void checkActionLog(List<String> log) {
+        for (int index = 0; index < log.size(); index++) {
+            rightPanelLogWindow.findAll(By.tagName("li")).get(index).shouldHave(text(log.get(index)));
+        }
+    }
+
+    public void selectRadio(RadioControls label) {
         SelenideElement radioControl = radioControls.stream().filter(box -> box.getText().equalsIgnoreCase(label.toString())).findFirst().get();
         radioControl.click();
     }
 
     public void checkRadioControlsActionLog(RadioControls label) {
-        selectRadio(label);
         rightPanelLogWindow.find(By.tagName("li")).shouldHave(text("metal: value changed to " + label.toString()));
     }
 
     public void selectDropdownItem(DropDownValues dropDownItem) {
-        dropdownColors.selectOptionContainingText(dropDownItem.toString());
+        dropdownColors.get(0).selectOptionContainingText(dropDownItem.toString());
     }
 
     public void checkDropdownActionLog(DropDownValues dropDownItem) {

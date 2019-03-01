@@ -2,7 +2,6 @@ package lesson6;
 
 import base.SelenideBase;
 import base.enums.BenefitIconsText;
-import base.enums.NavBarMenuItems;
 import base.enums.ServiceMenuItems;
 import base.enums.Users;
 import com.codeborne.selenide.SelenideElement;
@@ -15,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -106,13 +104,12 @@ public class SelenideIndexPage extends SelenideBase {
         }
     }
 
-    public void checkBenefitIconsText() {
-        // TODO It is not good idea incapsulate text into method.
+    public void checkBenefitIconsText(List<String> textUnderPictures) {
+        // TODO It is not good idea incapsulate text into method. - fixed
         // TODO This is not BDD style
-        assertEquals(benefitIconsText.get(0).getText(), BenefitIconsText.PRACTICE.toString());
-        assertEquals(benefitIconsText.get(1).getText(), BenefitIconsText.CUSTOM.toString());
-        assertEquals(benefitIconsText.get(2).getText(), BenefitIconsText.MULTI.toString());
-        assertEquals(benefitIconsText.get(3).getText(), BenefitIconsText.BASE.toString());
+        for (int index=0;index<textUnderPictures.size();index++){
+            assertEquals(benefitIconsText.get(index).getText(), BenefitIconsText.values()[index].toString());
+        }
     }
 
     public SelenideElement getHeaderMenuItemByName(String menuItemName) {

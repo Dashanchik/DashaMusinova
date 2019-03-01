@@ -1,21 +1,17 @@
 package hw6.steps;
 
-// TODO Delete unused imports
+// TODO Delete unused imports - fixed
+
 import base.enums.Users;
 import base.page_objects.SelenideDifferentElementsPage;
 import base.page_objects.SelenideUserTablePage;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import lesson6.SelenideIndexPage;
-
-import static base.enums.CheckboxesLabels.getCheckboxByTheName;
 
 public class ActionSteps {
 
     @When("^I login as a user '([^\"]*)'$")
-    public void iLoginAsUser(String user){
+    public void iLoginAsUser(String user) {
         new SelenideIndexPage().login(Users.getUserByTheName(user));
 
     }
@@ -31,8 +27,8 @@ public class ActionSteps {
         new SelenideIndexPage().getHeaderMenuItemByName(menuItemName).click();
     }
 
-    // TODO Please make proper annotation
-    @And("^I click on '([^\"]*)' button in Service dropdown$")
+    // TODO Please make proper annotation - fixed
+    @When("^I click on '([^\"]*)' button in Service dropdown$")
     public void iClickOnButtonInServiceDropdown(String menuItemName) {
         new SelenideIndexPage().openPageFromServicesMenuItemDropdown(menuItemName);
     }
@@ -46,7 +42,6 @@ public class ActionSteps {
     public void iClickOnDropdownInColumnTypeForUserRoman(String username) {
         new SelenideUserTablePage().clickDropdownOfUser(username);
     }
-
 
     @When("^I select checkbox '([^\"]*)'$")
     public void iSelectCheckboxWind(String checkboxLabel) {

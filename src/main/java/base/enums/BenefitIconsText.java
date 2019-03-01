@@ -16,4 +16,13 @@ public enum BenefitIconsText {
     public String toString() {
         return iconText;
     }
+
+    public static BenefitIconsText getIconTextByString(String iconText) throws IllegalArgumentException{
+        for (BenefitIconsText text: BenefitIconsText.values()){
+            if(text.toString().equals(iconText)){
+                return text;
+            }
+        }
+        throw new IllegalArgumentException("Wrong icon text");
+    }
 }

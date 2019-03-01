@@ -1,8 +1,8 @@
 package lesson6.steps;
 
 import base.enums.Users;
-import base.lesson7.entities.PO.SelenideUserTablePage;
-import base.lesson7.entities.SuperHero;
+import base.lesson6.entities.PO.SelenideUserTablePage;
+import base.lesson6.entities.SuperHero;
 import cucumber.api.java.en.Then;
 import lesson6.SelenideIndexPage;
 
