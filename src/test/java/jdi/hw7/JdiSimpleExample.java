@@ -1,4 +1,4 @@
-package jdi.lesson1;
+package jdi.hw7;
 
 import base.DataProviders.MetalsAndColorsDataProvider;
 import base.DataProviders.MetalsAndColorsTestData;
