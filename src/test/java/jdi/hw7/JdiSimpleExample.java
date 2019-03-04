@@ -3,6 +3,7 @@ package jdi.hw7;
 import base.DataProviders.MetalsAndColorsDataProvider;
 import base.DataProviders.MetalsAndColorsTestData;
 import base.jdi.JdiSite;
+import base.jdi.entities.MetalsAndColors;
 import com.epam.jdi.light.ui.html.PageFactory;
 import org.testng.annotations.*;
 
@@ -14,6 +15,7 @@ public class JdiSimpleExample {
     @BeforeTest(alwaysRun = true)
     public void beforeSuite() {
         PageFactory.initElements(JdiSite.class);
+
     }
 
     @AfterTest(alwaysRun = true)
@@ -23,6 +25,9 @@ public class JdiSimpleExample {
 
     @Test(dataProvider = "MetalsAndColorsData", dataProviderClass = MetalsAndColorsDataProvider.class)
     public void simpleJdiTest(MetalsAndColorsTestData testData) {
+        //0 init metalsAndColorsEntity
+        MetalsAndColors metalsAndColors = new MetalsAndColors(testData.getSummary(),testData.getColor(),testData.getMetal(),testData.getElements(),testData.getVegetables());
+
         //1 Login on JDI site as User
         JdiSite.indexPageJdi.open();
         JdiSite.indexPageJdi.login(PETER_CHAILOVSKII);
@@ -31,22 +36,16 @@ public class JdiSimpleExample {
         JdiSite.indexPageJdi.goToPageFromHeaderMenu("Metals & Colors");
 
         //3 Fill form Metals & Colors by data
-        JdiSite.metalsAndColorsPage.chooseSummary(testData.getSummary()[0]);
-        JdiSite.metalsAndColorsPage.chooseSummary(testData.getSummary()[1]);
-        JdiSite.metalsAndColorsPage.chooseElement(testData.getElements());
-        JdiSite.metalsAndColorsPage.chooseColor(testData.getColor());
-        JdiSite.metalsAndColorsPage.chooseMetal(testData.getMetals());
-        JdiSite.metalsAndColorsPage.chooseVegetable(testData.getVegetables());
-
+        JdiSite.metalsAndColorsPage.fillMetalsAndColorsForm(metalsAndColors);
         //4 Submit form Metals & Colors
         JdiSite.metalsAndColorsPage.submit();
 
         //5 Result section should contain data
-        JdiSite.metalsAndColorsPage.checkResults(
+        JdiSite.metalsAndColorsPage.checkResultsLog(
                 "Summary: " + (testData.getSummary()[0] + testData.getSummary()[1]),
                 "Elements: " + String.join(", ", testData.getElements()),
                 "Color: " + testData.getColor(),
-                "Metal: " + testData.getMetals(),
+                "Metal: " + testData.getMetal(),
                 "Vegetables: " + String.join(", ", testData.getVegetables()));
 
         //6 Logout

@@ -34,7 +34,7 @@ public class MetalsAndColorsTestData {
         this.color = color;
     }
 
-    public String getMetals() {
+    public String getMetal() {
         return metals;
     }
 
