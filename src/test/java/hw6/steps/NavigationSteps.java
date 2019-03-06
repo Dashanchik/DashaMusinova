@@ -1,7 +1,5 @@
 package hw6.steps;
 
-// TODO Delete unused imports - fixed
-
 import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.Given;
 

@@ -14,14 +14,11 @@ Feature: User can login to EPAM JDI site and sees the Home page
     And There's Service Dropdown with the correct items in the sidebar menu
     When I click on 'Service' button in Header
     And I go to 'DIFFERENT ELEMENTS' Page
-    # TODO What does it mean "Needed elements"? - fixed
     Then I see 4 checkboxes, 4 radios, 2 buttons and 1 dropdown on the Different Elements Page
     And I see the left section
     And I see the right section
     When I select checkbox 'Wind'
     And I select checkbox 'Water'
-    # TODO All steps which describe check logger could be combined into one - fixed
-    # TODO Why is it combined into one step - fixed
     And I can select radiobutton 'Selen'
     And I can select dropdown 'Yellow'
     And I select checkbox 'Water'

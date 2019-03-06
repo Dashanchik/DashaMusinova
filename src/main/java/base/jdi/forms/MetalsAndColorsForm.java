@@ -1,8 +1,8 @@
 package base.jdi.forms;
 
+import base.DataProviders.MetalsAndColorsTestData;
 import base.enums.CheckboxesLabels;
 import base.enums.RadioControls;
-import base.jdi.entities.MetalsAndColors;
 import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
 
-public class MetalsAndColorsForm extends Form<MetalsAndColors> {
+public class MetalsAndColorsForm extends Form<MetalsAndColorsTestData> {
 
     @FindBy(css = "[id='summary-block']")
-    public RadioButtons summary;
+    private RadioButtons summary;
 
     @FindBy(css = "p[class='checkbox'] label")
     public List<WebElement> elements;
@@ -35,32 +35,34 @@ public class MetalsAndColorsForm extends Form<MetalsAndColors> {
     public DataList metal;
 
     @JDropdown(root = "div[ui=droplist]", value = ".dropdown-toggle", list = "li", expand = ".caret")
-    public Droplist vegetables;
+    private Droplist vegetables;
 
     @ByText("Submit")
     public Button submit;
 
     @Css("[class$='info-panel-body-result'] li")
-    public List<WebElement> resultsBlock;
+    private List<WebElement> resultsBlock;
 
-    public void fillMetalsAndColorsForm(MetalsAndColors metalsAndColors) {
-        // TODO Java code convention !
-        List<CheckboxesLabels> checkboxesLabels = Arrays.stream(metalsAndColors.getElements()).map(CheckboxesLabels::getCheckboxByTheName).collect(Collectors.toList());
-        for (int index = 0; index < elements.size(); index++) {
+    public void fillMetalsAndColorsForm(MetalsAndColorsTestData testData) {
+        // TODO Java code convention ! - fixed
+        List<CheckboxesLabels> checkboxesLabels = Arrays.stream(testData.getElements())
+                .map(CheckboxesLabels::getCheckboxByTheName)
+                .collect(Collectors.toList());
+        for (WebElement element : elements) {
             for (CheckboxesLabels label : checkboxesLabels) {
-                if (elements.get(index).getText().contains(label.toString())) {
-                    elements.get(index).click();
+                if (element.getText().contains(label.toString())) {
+                    element.click();
                 }
             }
         }
-        this.colors.select(metalsAndColors.getColor());
-        metal.select(RadioControls.getRadioControlByTheName(metalsAndColors.getMetal()));
+        this.colors.select(testData.getColor());
+        metal.select(RadioControls.getRadioControlByTheName(testData.getMetal()));
         String selected = this.vegetables.getSelected();
         Arrays.stream(selected.split(", ")).forEach(e -> this.vegetables.select(e));
-        for (String var : metalsAndColors.getVegetables()) {
+        for (String var : testData.getVegetables()) {
             this.vegetables.select(var);
         }
-        for (int radio : metalsAndColors.getSummary()) {
+        for (int radio : testData.getSummary()) {
             summary.select(Integer.toString(radio));
         }
     }

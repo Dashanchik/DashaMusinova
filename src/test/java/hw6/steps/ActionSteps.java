@@ -1,7 +1,5 @@
 package hw6.steps;
 
-// TODO Delete unused imports - fixed
-
 import base.enums.Users;
 import base.page_objects.SelenideDifferentElementsPage;
 import base.page_objects.SelenideUserTablePage;
@@ -27,7 +25,6 @@ public class ActionSteps {
         new SelenideIndexPage().getHeaderMenuItemByName(menuItemName).click();
     }
 
-    // TODO Please make proper annotation - fixed
     @When("^I click on '([^\"]*)' button in Service dropdown$")
     public void iClickOnButtonInServiceDropdown(String menuItemName) {
         new SelenideIndexPage().openPageFromServicesMenuItemDropdown(menuItemName);

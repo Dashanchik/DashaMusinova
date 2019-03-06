@@ -1,17 +1,17 @@
 package base.page_objects;
 
-import base.jdi.entities.MetalsAndColors;
+import base.DataProviders.MetalsAndColorsTestData;
 import base.jdi.forms.MetalsAndColorsForm;
 import com.epam.jdi.light.elements.composite.WebPage;
 
 public class MetalsAndColorsPage extends WebPage {
     public static final String PAGE_TITLE = "Metal and Colors";
 
-    public MetalsAndColorsForm metalsAndColorsForm;
+    private MetalsAndColorsForm metalsAndColorsForm;
 
 
-    public void fillMetalsAndColorsForm(MetalsAndColors metalsAndColors) {
-       metalsAndColorsForm.fillMetalsAndColorsForm(metalsAndColors);
+    public void fillMetalsAndColorsForm(MetalsAndColorsTestData testData) {
+       metalsAndColorsForm.fillMetalsAndColorsForm(testData);
     }
 
     public void submit() {

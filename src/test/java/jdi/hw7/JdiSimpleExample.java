@@ -3,7 +3,6 @@ package jdi.hw7;
 import base.DataProviders.MetalsAndColorsDataProvider;
 import base.DataProviders.MetalsAndColorsTestData;
 import base.jdi.JdiSite;
-import base.jdi.entities.MetalsAndColors;
 import com.epam.jdi.light.ui.html.PageFactory;
 import org.testng.annotations.*;
 
@@ -25,12 +24,9 @@ public class JdiSimpleExample {
 
     @Test(dataProvider = "MetalsAndColorsData", dataProviderClass = MetalsAndColorsDataProvider.class)
     public void simpleJdiTest(MetalsAndColorsTestData testData) {
-        //0 init metalsAndColorsEntity
         // TODO What is the reason of 2 exactly the same entity ?
-        // TODO Anyway, all actions with data should not be in test.
-        // TODO Code convention !
-        MetalsAndColors metalsAndColors = new MetalsAndColors(testData.getSummary(),testData.getColor(),testData.getMetal(),testData.getElements(),testData.getVegetables());
-
+        // TODO Anyway, all actions with data should not be in test. - fixed, class deleted
+        // TODO Code convention
         //1 Login on JDI site as User
         JdiSite.indexPageJdi.open();
         JdiSite.indexPageJdi.login(PETER_CHAILOVSKII);
@@ -39,7 +35,7 @@ public class JdiSimpleExample {
         JdiSite.indexPageJdi.goToPageFromHeaderMenu("Metals & Colors");
 
         //3 Fill form Metals & Colors by data
-        JdiSite.metalsAndColorsPage.fillMetalsAndColorsForm(metalsAndColors);
+        JdiSite.metalsAndColorsPage.fillMetalsAndColorsForm(testData);
         //4 Submit form Metals & Colors
         JdiSite.metalsAndColorsPage.submit();
 
