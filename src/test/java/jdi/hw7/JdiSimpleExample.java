@@ -26,6 +26,9 @@ public class JdiSimpleExample {
     @Test(dataProvider = "MetalsAndColorsData", dataProviderClass = MetalsAndColorsDataProvider.class)
     public void simpleJdiTest(MetalsAndColorsTestData testData) {
         //0 init metalsAndColorsEntity
+        // TODO What is the reason of 2 exactly the same entity ?
+        // TODO Anyway, all actions with data should not be in test.
+        // TODO Code convention !
         MetalsAndColors metalsAndColors = new MetalsAndColors(testData.getSummary(),testData.getColor(),testData.getMetal(),testData.getElements(),testData.getVegetables());
 
         //1 Login on JDI site as User

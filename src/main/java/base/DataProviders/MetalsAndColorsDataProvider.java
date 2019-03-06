@@ -20,8 +20,9 @@ public class MetalsAndColorsDataProvider {
         //parse the file into JsonObject
         JsonObject fileData = (JsonObject) new JsonParser().parse(reader);
         //map the created Json on MetalsAndColorsTestData class fields using Map<String, MetalsAndColorsTestData>
-        Map<String, MetalsAndColorsTestData> listOfTestData = new Gson().fromJson(fileData, new TypeToken<Map<String, MetalsAndColorsTestData>>() {
-        }.getType());
+        Map<String, MetalsAndColorsTestData> listOfTestData = new Gson().fromJson(fileData,
+                new TypeToken<Map<String, MetalsAndColorsTestData>>() {
+                }.getType());
         //fill in the dataProvider Object[][] with the testdata (1 stands for MetalsAndColorsTestData obj)
         Object[][] finalData = new Object[listOfTestData.size()][1];
         for (int index = 0; index < finalData.length; index++) {
