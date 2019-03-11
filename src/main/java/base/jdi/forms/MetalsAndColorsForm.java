@@ -44,7 +44,6 @@ public class MetalsAndColorsForm extends Form<MetalsAndColorsTestData> {
     private List<WebElement> resultsBlock;
 
     public void fillMetalsAndColorsForm(MetalsAndColorsTestData testData) {
-        // TODO Java code convention ! - fixed
         List<CheckboxesLabels> checkboxesLabels = Arrays.stream(testData.getElements())
                 .map(CheckboxesLabels::getCheckboxByTheName)
                 .collect(Collectors.toList());

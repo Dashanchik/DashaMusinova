@@ -24,9 +24,6 @@ public class JdiSimpleExample {
 
     @Test(dataProvider = "MetalsAndColorsData", dataProviderClass = MetalsAndColorsDataProvider.class)
     public void simpleJdiTest(MetalsAndColorsTestData testData) {
-        // TODO What is the reason of 2 exactly the same entity ?
-        // TODO Anyway, all actions with data should not be in test. - fixed, class deleted
-        // TODO Code convention
         //1 Login on JDI site as User
         JdiSite.indexPageJdi.open();
         JdiSite.indexPageJdi.login(PETER_CHAILOVSKII);
