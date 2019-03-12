@@ -28,7 +28,6 @@ public class YandexSpelleerConstants {
         SimpleWord(String corrVer, String wrongVer) {
             this.corrVer = corrVer;
             this.wrongVer = wrongVer;
-
         }
     }
 
