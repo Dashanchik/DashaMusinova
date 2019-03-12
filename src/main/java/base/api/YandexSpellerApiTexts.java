@@ -12,9 +12,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static base.api.YandexSpelleerConstants.*;
 import static org.hamcrest.Matchers.lessThan;
@@ -35,17 +33,23 @@ public class YandexSpellerApiTexts {
         }
 
         public ApiBuilder texts(String... texts) {
-                spellerApi.params.put(PARAM_TEXTS, texts);//TODO - change
+            List<String> textsList = Arrays.asList(texts);
+                spellerApi.params.put(PARAM_TEXTS, textsList);
             return this;
         }
 
-        public ApiBuilder options(String options) {
-            spellerApi.params.put(PARAM_OPTIONS, options);
+        public ApiBuilder options(int options) {
+            spellerApi.params.put(PARAM_OPTIONS, Integer.toString(options));
             return this;
         }
 
-        public ApiBuilder language(Languages language) {
-            spellerApi.params.put(PARAM_LANGUAGES, language.getLang());
+        public ApiBuilder language(Languages... languages) {
+            List<String> languagesList = new ArrayList<>();
+            for (Languages language: languages){
+                languagesList.add(language.getLang());
+            }
+            String newLanguageList = String.join(", ", languagesList);
+            spellerApi.params.put(PARAM_LANGUAGES, newLanguageList);
             return this;
         }
 
@@ -65,7 +69,11 @@ public class YandexSpellerApiTexts {
     public static List<YandexSpellerAnswer> getYandexSpellerAnswers(Response response) {
         List<List<YandexSpellerAnswer>> answersList =  new Gson().fromJson(response.asString().trim(), new TypeToken<List<List<YandexSpellerAnswer>>>() {
         }.getType());
-        return answersList.get(0);
+        List<YandexSpellerAnswer> finalAnswerList = new ArrayList<>();
+        for(List<YandexSpellerAnswer> answer: answersList){
+            finalAnswerList.add(answer.get(0));
+        }
+        return finalAnswerList;
     }
 
     public static ResponseSpecification successResponse() {

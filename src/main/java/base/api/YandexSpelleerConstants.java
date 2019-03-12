@@ -1,7 +1,5 @@
 package base.api;
 
-import java.util.List;
-
 public class YandexSpelleerConstants {
 
     static final String YANDEX_SPELLER_API_URI = "https://speller.yandex.net/services/spellservice.json/checkTexts";
@@ -11,8 +9,9 @@ public class YandexSpelleerConstants {
 
 
     public enum SimpleWord {
-        MOTHER("mother", "mottherr"),
-        BROTHER("brother", "bbrother");
+        WORD_RUS("вордд", "ворд"),
+        MINUTE("minute", "minuute"),
+        SECOND("second","ssecond");
 
         private String corrVer;
         private String wrongVer;
