@@ -18,7 +18,7 @@ public class YandexSpellerTextsTest {
         List<YandexSpellerAnswer> answer =
                 YandexSpellerApiTexts.getYandexSpellerAnswers(YandexSpellerApiTexts.with().
                          language(Languages.EN)
-                        .options(5)
+                        .options(2,4)
                         .texts(SimpleWord.MINUTE.wrongVer(), SimpleWord.SECOND.wrongVer())
                         .callApi());
         assertThat("Unswers number is not correct.", answer.size(), equalTo(2));

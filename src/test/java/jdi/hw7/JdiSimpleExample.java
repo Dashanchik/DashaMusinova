@@ -3,6 +3,7 @@ package jdi.hw7;
 import base.DataProviders.MetalsAndColorsDataProvider;
 import base.DataProviders.MetalsAndColorsTestData;
 import base.jdi.JdiSite;
+import com.epam.jdi.light.driver.get.DriverData;
 import com.epam.jdi.light.ui.html.PageFactory;
 import org.testng.annotations.*;
 
@@ -13,8 +14,8 @@ public class JdiSimpleExample {
 
     @BeforeTest(alwaysRun = true)
     public void beforeSuite() {
+        DriverData.DRIVER_VERSION = "2.46";
         PageFactory.initElements(JdiSite.class);
-
     }
 
     @AfterTest(alwaysRun = true)

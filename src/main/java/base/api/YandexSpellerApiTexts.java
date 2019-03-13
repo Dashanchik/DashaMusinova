@@ -13,6 +13,7 @@ import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 import static base.api.YandexSpelleerConstants.*;
 import static org.hamcrest.Matchers.lessThan;
@@ -38,8 +39,8 @@ public class YandexSpellerApiTexts {
             return this;
         }
 
-        public ApiBuilder options(int options) {
-            spellerApi.params.put(PARAM_OPTIONS, Integer.toString(options));
+        public ApiBuilder options(int... options) {
+            spellerApi.params.put(PARAM_OPTIONS, Integer.toString(IntStream.of(options).sum()));
             return this;
         }
 
