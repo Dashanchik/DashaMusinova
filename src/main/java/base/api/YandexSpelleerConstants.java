@@ -14,7 +14,11 @@ public class YandexSpelleerConstants {
         MINUTE_UK("хвилина", "хвиллина"),
         HOUR_UK("година", "годиина"),
         MINUTE_EN("minute", "minuute"),
-        HOUR_EN("hour","houur");
+        HOUR_EN("hour","houur"),
+        URL("google.com","google"),
+        WORD_WITH_CAPITALS("word","wOrD"),
+        REPEAT_WORD("на", "Едем на на юг!"),
+        UNKNOWN_WORD("sdsdffd","sdsdffd");
 
         private String corrVer;
         private String wrongVer;

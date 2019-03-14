@@ -61,6 +61,19 @@ public class YandexSpellerTextsTest {
         assertThat("The answer is wrong", answer.get(2).s, hasItem(SimpleWord.MINUTE_RU.corrVer()));
     }
 
+//Test fails
+    @Test
+    public void checkUnknownWordError() {
+        List<YandexSpellerAnswer> answer =
+                YandexSpellerApiTexts.getYandexSpellerAnswers(YandexSpellerApiTexts.with().
+                        language(Languages.EN)
+                        .options(0)
+                        .texts(SimpleWord.UNKNOWN_WORD.wrongVer())
+                        .callApi());
+        assertThat("Unswers number is not correct.", answer.size(), equalTo(1));
+        assertThat("Errorcode is not correct", answer.get(0).code, equalTo(1));
+    }
+
     @Test
     public void checkIgnoreDigitsOption() {
         List<YandexSpellerAnswer> answer =
@@ -73,14 +86,50 @@ public class YandexSpellerTextsTest {
     }
 
     @Test
-    public void checkIgnoreUrlsOption() {
+    public void checkIgnoreUrlsAndDigitsOption() {
         List<YandexSpellerAnswer> answer =
                 YandexSpellerApiTexts.getYandexSpellerAnswers(YandexSpellerApiTexts.with().
                         language(Languages.EN)
-                        .options(4)
-                        .texts("http://ya.ru")
+                        .options(2,4)
+                        .texts(SimpleWord.URL.wrongVer()+"555")
                         .callApi());
         assertThat("Unswers number is not correct.", answer.size(), equalTo(0));
     }
+
+//Test fails
+    @Test
+    public void checkCapitalLettersError() {
+        List<YandexSpellerAnswer> answer =
+                YandexSpellerApiTexts.getYandexSpellerAnswers(YandexSpellerApiTexts.with().
+                        language(Languages.EN)
+                        .options(0)
+                        .texts(SimpleWord.WORD_WITH_CAPITALS.wrongVer())
+                        .callApi());
+        assertThat("Unswers number is not correct.", answer.size(), equalTo(1));
+        assertThat("Errorcode is not correct.", answer.get(0), equalTo(3));
+    }
+
+    @Test
+    public void checkIgnoreCapitalLettersAndDigitsOption() {
+        List<YandexSpellerAnswer> answer =
+                YandexSpellerApiTexts.getYandexSpellerAnswers(YandexSpellerApiTexts.with().
+                        language(Languages.EN)
+                        .options(2,4,512)
+                        .texts(SimpleWord.WORD_WITH_CAPITALS.wrongVer())
+                        .callApi());
+        assertThat("Unswers number is not correct.", answer.size(), equalTo(0));
+    }
+
+    @Test
+    public void checkFindRepeatWordsOption() {
+        List<YandexSpellerAnswer> answer =
+                YandexSpellerApiTexts.getYandexSpellerAnswers(YandexSpellerApiTexts.with().
+                        language(Languages.RU)
+                        .options(512)
+                        .texts(SimpleWord.REPEAT_WORD.wrongVer())
+                        .callApi());
+        assertThat("Unswers number is not correct.", answer.size(), equalTo(0));
+    }
+
 
 }
