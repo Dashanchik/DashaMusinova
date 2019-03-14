@@ -72,6 +72,9 @@ public class YandexSpellerApiTexts {
         }.getType());
         List<YandexSpellerAnswer> finalAnswerList = new ArrayList<>();
         for(List<YandexSpellerAnswer> answer: answersList){
+            if(answer.size()<1){
+                return finalAnswerList;
+            }
             finalAnswerList.add(answer.get(0));
         }
         return finalAnswerList;

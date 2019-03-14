@@ -9,9 +9,12 @@ public class YandexSpelleerConstants {
 
 
     public enum SimpleWord {
-        WORD_RUS("вордд", "ворд"),
-        MINUTE("minute", "minuute"),
-        SECOND("second","ssecond");
+        MINUTE_RU("минута", "минутта"),
+        HOUR_RU("час", "ччас"),
+        MINUTE_UK("хвилина", "хвиллина"),
+        HOUR_UK("година", "годиина"),
+        MINUTE_EN("minute", "minuute"),
+        HOUR_EN("hour","houur");
 
         private String corrVer;
         private String wrongVer;
