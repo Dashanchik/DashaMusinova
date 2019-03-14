@@ -1,4 +1,4 @@
-package hw8;
+package api.hw8;
 
 import base.api.YandexSpelleerConstants.*;
 import base.api.YandexSpellerApiTexts;
