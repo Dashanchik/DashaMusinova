@@ -7,7 +7,6 @@ public class YandexSpelleerConstants {
     static final String PARAM_OPTIONS = "options";
     static final String PARAM_LANGUAGES = "languages";
 
-
     public enum SimpleWord {
         MINUTE_RU("минута", "минутта"),
         HOUR_RU("час", "ччас"),

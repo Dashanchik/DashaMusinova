@@ -28,7 +28,6 @@ public class YandexSpellerApiTexts {
     public static class ApiBuilder {
         YandexSpellerApiTexts spellerApi;
 
-
         private ApiBuilder(YandexSpellerApiTexts gcApi) {
             spellerApi = gcApi;
         }
@@ -93,8 +92,8 @@ public class YandexSpellerApiTexts {
         return new RequestSpecBuilder()
                 .setAccept(ContentType.XML)
                 .setRelaxedHTTPSValidation()
-                .addHeader("custom header2", "header2.value")
-                .addQueryParam("requestID", new Random().nextLong())
+                .addHeader("Dasha header", "header.value")
+                .addQueryParam("RequestID", new Random().nextLong())
                 .setBaseUri(YANDEX_SPELLER_API_URI)
                 .build();
     }
