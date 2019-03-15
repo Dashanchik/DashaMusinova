@@ -1,12 +1,12 @@
 ***замечания***
-RusSingleTextFindRepeatTest - хотелось бы иметь проперти на уровне проекта для language, например, languageRU, languageEng
-EnRusCatchRepeatMultipleLinesTest - тест падает 
+RusSingleTextFindRepeatTest - хотелось бы иметь проперти на уровне проекта для language, например, languageRU, languageEng - fixed
+EnRusCatchRepeatMultipleLinesTest - тест падает - да, он падает и это баг - не отдает ошибку на повтор слова
 AllLangsMultipleLinesTest 
-  - зачем в пропертях лишние данные (бабочкаб, ciкк)
+  - зачем в пропертях лишние данные (бабочкаб, ciкк) - fixed
   - если поменять expected и тест начнет падать, то падаеть только последний степ. можешь ли переписать так,
-  чтобы падало на конкретной итерации в цикле?   (за подробностями - в личку)
+  чтобы падало на конкретной итерации в цикле?   (за подробностями - в личку) - fixed
 ***пожелания***
-EnRusMultipleLinesTest - есть ли возможностьпроверить массив по xpath?
+EnRusMultipleLinesTest - есть ли возможность проверить массив по xpath? - done
 ***понравилось***
 - RusSingleTextFindRepeatTest - хороший набор проверок
 - AllLangsMultipleLinesTest - добротно панисан скрипт
