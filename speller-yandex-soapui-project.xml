@@ -396,7 +396,7 @@ declare namespace ns1='http://speller.yandex.net/services/spellservice';
          <spel:text>${Properties#testData}</spel:text>\r
       </spel:CheckTextRequest>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="236fe226-ffd8-4a96-9378-e032ad6a760a" name="SOAP Response"/><con:assertion type="Valid HTTP Status Codes" id="d27c324b-3a5f-471e-8833-297d0ce6bb59" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Simple Contains" id="a9e5b72f-e5eb-460f-b2b7-6e81d6b05054" name="Contains error code 1"><con:configuration><token>error code="${Properties#errorCode}"</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://speller.yandex.net/services/spellservice/checkText"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="1317baa0-a75c-4ced-8008-94fb6d3b1266" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="AllLangsMultipleLinesTest" searchProperties="true"><con:settings/><con:testStep type="properties" name="Properties" id="48bb325e-3281-4160-8a78-ab4b657b6063"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>options</con:name><con:value>0</con:value></con:property><con:property><con:name>rusTestdata</con:name><con:value/></con:property><con:property><con:name>enTestdata</con:name><con:value/></con:property><con:property><con:name>ukTestdata</con:name><con:value/></con:property><con:property><con:name>rusHint</con:name><con:value/></con:property><con:property><con:name>enHint</con:name><con:value/></con:property><con:property><con:name>ukHint</con:name><con:value/></con:property><con:property><con:name>counter</con:name><con:value>2</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" id="0fbad348-df45-4180-919b-abd2824f8c3b" name="sendCheckTexts" disabled="true"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkTexts</con:operation><con:request name="sendCheckTexts" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="740fb9d1-e5ae-40ed-9fd9-aa4c203ba593"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://speller.yandex.net/services/spellservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="236fe226-ffd8-4a96-9378-e032ad6a760a" name="SOAP Response"/><con:assertion type="Valid HTTP Status Codes" id="d27c324b-3a5f-471e-8833-297d0ce6bb59" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Simple Contains" id="a9e5b72f-e5eb-460f-b2b7-6e81d6b05054" name="Contains error code 1"><con:configuration><token>error code="${Properties#errorCode}"</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://speller.yandex.net/services/spellservice/checkText"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="1317baa0-a75c-4ced-8008-94fb6d3b1266" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="AllLangsMultipleLinesTest" searchProperties="true"><con:settings/><con:testStep type="request" id="0fbad348-df45-4180-919b-abd2824f8c3b" name="sendCheckTexts" disabled="true"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkTexts</con:operation><con:request name="sendCheckTexts" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="740fb9d1-e5ae-40ed-9fd9-aa4c203ba593"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://speller.yandex.net/services/spellservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <spel:CheckTextsRequest lang="${#Project#langEn}, ${#Project#langRu}, ${#Project#langUk}" options="${Properties#options}" format="">\r
@@ -406,42 +406,52 @@ declare namespace ns1='http://speller.yandex.net/services/spellservice';
           <spel:text>${#TestCase#ukTestdata}</spel:text>
       </spel:CheckTextsRequest>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="52dc8258-7a10-48d7-9208-aaf1526b011c" name="SOAP Response"/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type="XPath Match" id="1b4648ca-4fc4-47fc-b81d-eb061d6cf551" name="XPath Match"><con:configuration/></con:assertion><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://speller.yandex.net/services/spellservice/checkTexts"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Cycle for all languages check" id="de15d72b-e86a-430f-a29c-7d8a151c8a45"><con:settings/><con:config><script>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context);
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="52dc8258-7a10-48d7-9208-aaf1526b011c" name="SOAP Response"/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type="XPath Match" id="1b4648ca-4fc4-47fc-b81d-eb061d6cf551" name="XPath Match"><con:configuration/></con:assertion><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type=""/><con:assertion type="XPath Match" id="723fa9c0-9668-44e5-94a6-2854b9f87b6a" name="Contains ruHint"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://speller.yandex.net/services/spellservice';
+//ns1:ArrayOfSpellResult/*:SpellResult[1]/*:error/*:s</path><content>${#TestCase#ruHint}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="723fa9c0-9668-44e5-94a6-2854b9f87b6a" name="Contains enHint"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://speller.yandex.net/services/spellservice';
+//ns1:ArrayOfSpellResult/*:SpellResult[2]/*:error/*:s</path><content>${#TestCase#enHint}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="723fa9c0-9668-44e5-94a6-2854b9f87b6a" name="Contains ukHint"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://speller.yandex.net/services/spellservice';
+//ns1:ArrayOfSpellResult/*:SpellResult[3]/*:error/*:s</path><content>${#TestCase#ukHint}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://speller.yandex.net/services/spellservice/checkTexts"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Cycle for all languages check" id="de15d72b-e86a-430f-a29c-7d8a151c8a45"><con:settings/><con:config><script>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context);
 
 ruTestdataArray = ["метсестра","агонь"];
 enTestdataArray = ["firej","butterflai"];
 ukTestdataArray = ["відстаньг","відчайь"];
 ruHintsArray = ["медсестра","огонь"];
-enHintsArray = ["fire","butterfly"];
+enHintsArray = ["fir","butterfly"];
 ukHintsArray = ["відстань","відчай"];
 
-def testStep = testRunner.testCase.getTestStepByName("sendCheckTexts");
-def testCase = testRunner.testCase;
-def testStepContext = new com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext(testStep);
-def request = context.testCase.getTestStepByName("sendCheckTexts");
+//def testStep = testRunner.testCase.getTestStepByName("sendCheckTexts");
+//def testStepContext = new com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext(testStep);
+//def request = context.testCase.getTestStepByName("sendCheckTexts");
 
-def counter = 0;
+def testCase = testRunner.testCase;
+def counter=0;
 
 while (counter &lt; ruTestdataArray.size()) {
 	
 	testCase.setPropertyValue("ruTestdata", ruTestdataArray[counter]);
 	testCase.setPropertyValue("enTestdata", enTestdataArray[counter]);
 	testCase.setPropertyValue("ukTestdata", ukTestdataArray[counter]);
+	testCase.setPropertyValue("ruHint", ruHintsArray[counter]);
+	testCase.setPropertyValue("enHint", enHintsArray[counter]);
+	testCase.setPropertyValue("ukHint", ukHintsArray[counter]);
+
 	testRunner.runTestStepByName("sendCheckTexts");
-	def responseCurrentHolder = groovyUtils.getXmlHolder(request.name +"#Response");
-	responseCurrentHolder.namespaces["ns1"] = "http://speller.yandex.net/services/spellservice"
-	def ruHintsResponse = responseCurrentHolder.getNodeValues("//ns1:SpellResult[1]//ns1:s");
-	def enHintsResponse = responseCurrentHolder.getNodeValues("//ns1:SpellResult[2]//ns1:s");
-	def ukHintsResponse = responseCurrentHolder.getNodeValues("//ns1:SpellResult[3]//ns1:s");
-	
-	if (ruHintsResponse[0] != ruHintsArray[counter]){
-		testRunner.fail("Result not as expected! Expected: " + ruHintsArray[counter] + ", but found: " + ruHintsResponse[0]);
-	} else if (enHintsResponse[0] != enHintsArray[counter]){
-		testRunner.fail("Result not as expected! Expected: " + enHintsArray[counter] + ", but found: " + enHintsResponse[0]);
-	} else if (ukHintsResponse[0] != ukHintsArray[counter]){
-		testRunner.fail("Result not as expected! Expected: " + ukHintsArray[counter] + ", but found: " + ukHintsResponse[0]);
-	} else {
-		log.info("Test " + (counter+1) + " passed for " + ruTestdataArray[counter] + ", " + enTestdataArray[counter] + ", "  + ukTestdataArray[counter]);
-	}
-	counter += 1;
-}</script></con:config></con:testStep><con:properties><con:property><con:name>counter</con:name><con:value>2</con:value></con:property><con:property><con:name>enTestdata</con:name><con:value>butterflai</con:value></con:property><con:property><con:name>ukTestdata</con:name><con:value>відчайь</con:value></con:property><con:property><con:name>language</con:name><con:value>en,ru,uk</con:value></con:property><con:property><con:name>options</con:name><con:value>0</con:value></con:property><con:property><con:name>ruTestdata</con:name><con:value>агонь</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>testData</con:name><con:value>testt</con:value></con:property></con:properties></con:testSuite><con:properties><con:property><con:name>langRu</con:name><con:value>ru</con:value></con:property><con:property><con:name>langEn</con:name><con:value>en</con:value></con:property><con:property><con:name>langUk</con:name><con:value>uk</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+//	def responseCurrentHolder = groovyUtils.getXmlHolder(request.name +"#Response");
+//	responseCurrentHolder.namespaces["ns1"] = "http://speller.yandex.net/services/spellservice"
+//	def ruHintsResponse = responseCurrentHolder.getNodeValues("//ns1:SpellResult[1]//ns1:s");
+//	def enHintsResponse = responseCurrentHolder.getNodeValues("//ns1:SpellResult[2]//ns1:s");
+//	def ukHintsResponse = responseCurrentHolder.getNodeValues("//ns1:SpellResult[3]//ns1:s");
+//	
+//	if (ruHintsResponse[0] != ruHintsArray[counter]){
+//		testRunner.fail("Result not as expected! Expected: " + ruHintsArray[counter] + ", but found: " + ruHintsResponse[0]);
+//	} else if (enHintsResponse[0] != enHintsArray[counter]){
+//		testRunner.fail("Result not as expected! Expected: " + enHintsArray[counter] + ", but found: " + enHintsResponse[0]);
+//	} else if (ukHintsResponse[0] != ukHintsArray[counter]){
+//		testRunner.fail("Result not as expected! Expected: " + ukHintsArray[counter] + ", but found: " + ukHintsResponse[0]);
+//	} else {
+//		log.info("Test " + (counter+1) + " passed for " + ruTestdataArray[counter] + ", " + enTestdataArray[counter] + ", "  + ukTestdataArray[counter]);
+//	}
+		counter ++;
+}</script></con:config></con:testStep><con:properties><con:property><con:name>counter</con:name><con:value>2</con:value></con:property><con:property><con:name>enTestdata</con:name><con:value>butterflai</con:value></con:property><con:property><con:name>ukTestdata</con:name><con:value>відчайь</con:value></con:property><con:property><con:name>language</con:name><con:value>en,ru,uk</con:value></con:property><con:property><con:name>options</con:name><con:value>0</con:value></con:property><con:property><con:name>ruTestdata</con:name><con:value>агонь</con:value></con:property><con:property><con:name>ruHint</con:name><con:value>огонь</con:value></con:property><con:property><con:name>enHint</con:name><con:value>butterfly</con:value></con:property><con:property><con:name>ukHint</con:name><con:value>відчай</con:value></con:property></con:properties></con:testCase><con:properties><con:property><con:name>testData</con:name><con:value>testt</con:value></con:property></con:properties></con:testSuite><con:properties><con:property><con:name>langRu</con:name><con:value>ru</con:value></con:property><con:property><con:name>langEn</con:name><con:value>en</con:value></con:property><con:property><con:name>langUk</con:name><con:value>uk</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
