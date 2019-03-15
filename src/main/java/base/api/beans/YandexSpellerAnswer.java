@@ -1,18 +1,19 @@
 
 package base.api.beans;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class YandexSpellerAnswer {
 
-    @SerializedName("code")
-    @Expose
+    @SerializedName("code")//todo нет необходимости, т.к. название переменной и значение в аннотации совпадают.
+    @Expose//todo зачем эта аннотация?
     public Integer code;
     @SerializedName("pos")
     @Expose

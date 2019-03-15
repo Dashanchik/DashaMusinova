@@ -1,6 +1,11 @@
 package api.hw8;
 
-import base.api.YandexSpelleerConstants.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import base.api.YandexSpelleerConstants.Languages;
+import base.api.YandexSpelleerConstants.SimpleWord;
 import base.api.YandexSpellerApiTexts;
 import base.api.beans.YandexSpellerAnswer;
 import io.restassured.RestAssured;
@@ -8,19 +13,19 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+//todo постарайся разгруппировать по сьюттам, тестов не очень много, но все-таки так будет наглянее
 public class YandexSpellerTextsTest {
 
     @Test
     public void checkStatusCodeSuccess() {
         RestAssured
-                .given(YandexSpellerApiTexts.baseRequestConfiguration())
-                .get().prettyPeek()
+                .given(YandexSpellerApiTexts.baseRequestConfiguration())//todo не стесняйся использовать статический импорт - так читабельнее
+                .get().prettyPeek()//todo .prettyPeek() в этом нет необходимости
                 .then().specification(YandexSpellerApiTexts.successResponse());
     }
 
+    //todo checkSpellingEnglishWords, checkSpellingRussianWords, checkSpellingUkranianWords
+    //todo тут один сценарий и незачем его кописровать - просто используй DataProvider
     @Test
     public void checkSpellingEnglishWords() {
         List<YandexSpellerAnswer> answer =
@@ -52,8 +57,9 @@ public class YandexSpellerTextsTest {
                         .language(Languages.UK)
                         .texts(SimpleWord.MINUTE_UK.wrongVer(), SimpleWord.HOUR_UK.wrongVer())
                         .callApi());
-        assertThat("Unswers number is not correct.", answer.size(), equalTo(2));
-        assertThat("The answer is wrong", answer.get(0).s, hasItem(SimpleWord.MINUTE_UK.corrVer()));
+        assertThat("Unswers number is not correct.", answer.size(), equalTo(2));//todo "Unswers number is not correct."
+        //todo сильно много, где встречается. лучше спрятать это в отдельный класс с асертами и назвать метод, например, assertAnswerSize(answer, 2);
+        assertThat("The answer is wrong", answer.get(0).s, hasItem(SimpleWord.MINUTE_UK.corrVer()));//todo комментарий аналогичный
         assertThat("The answer is wrong", answer.get(1).s, hasItem(SimpleWord.HOUR_UK.corrVer()));
     }
 
@@ -134,6 +140,8 @@ public class YandexSpellerTextsTest {
     @Test
     public void checkIgnoreCapitalLettersAndDigitsOption() {
         List<YandexSpellerAnswer> answer =
+                //todo разнеси по разным класса формаорование запроса и его исполнение
+                //todo getYandexSpellerAnswers & with должны быть в разных классах
                 YandexSpellerApiTexts.getYandexSpellerAnswers(YandexSpellerApiTexts.with()
                         .language(Languages.EN)
                         .options(2, 4, 512)
