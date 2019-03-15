@@ -33,7 +33,7 @@ public class YandexSpellerApiTexts {
 
     private HashMap<String, Object> params = new HashMap<>();
 
-    public static class ApiBuilder {//todo отпарвь либо вниз класаа, а лучше в отдельный файл
+    public static class ApiBuilder {//todo отправь либо вниз класса, а лучше в отдельный файл
         YandexSpellerApiTexts spellerApi;
 
         private ApiBuilder(YandexSpellerApiTexts gcApi) {
