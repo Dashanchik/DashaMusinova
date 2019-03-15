@@ -1,5 +1,12 @@
 package base.api;
 
+import static base.api.YandexSpelleerConstants.Languages;
+import static base.api.YandexSpelleerConstants.PARAM_LANGUAGES;
+import static base.api.YandexSpelleerConstants.PARAM_OPTIONS;
+import static base.api.YandexSpelleerConstants.PARAM_TEXTS;
+import static base.api.YandexSpelleerConstants.YANDEX_SPELLER_API_URI;
+import static org.hamcrest.Matchers.lessThan;
+
 import base.api.beans.YandexSpellerAnswer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,20 +19,21 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
-
-import static base.api.YandexSpelleerConstants.*;
-import static org.hamcrest.Matchers.lessThan;
 
 public class YandexSpellerApiTexts {
 
     private YandexSpellerApiTexts() {
-    }
+    }//todo зачем дефолтный конструктор? ***з***
 
     private HashMap<String, Object> params = new HashMap<>();
 
-    public static class ApiBuilder {
+    public static class ApiBuilder {//todo отпарвь либо вниз класаа, а лучше в отдельный файл
         YandexSpellerApiTexts spellerApi;
 
         private ApiBuilder(YandexSpellerApiTexts gcApi) {
@@ -53,7 +61,7 @@ public class YandexSpellerApiTexts {
             return this;
         }
 
-        public Response callApi() {
+        public Response callApi() { // todo вообще не очень говорящее название метода. если метод делает get, то  и назввай его getSomething()...
             return RestAssured.with()
                     .queryParams(spellerApi.params)
                     .log().all()
@@ -91,9 +99,9 @@ public class YandexSpellerApiTexts {
     public static RequestSpecification baseRequestConfiguration() {
         return new RequestSpecBuilder()
                 .setAccept(ContentType.XML)
-                .setRelaxedHTTPSValidation()
-                .addHeader("Dasha header", "header.value")
-                .addQueryParam("RequestID", new Random().nextLong())
+                .setRelaxedHTTPSValidation()//todo зачем это?
+                .addHeader("Dasha header", "header.value")//todo зачем это?
+                .addQueryParam("RequestID", new Random().nextLong())//todo зачем это?
                 .setBaseUri(YANDEX_SPELLER_API_URI)
                 .build();
     }
