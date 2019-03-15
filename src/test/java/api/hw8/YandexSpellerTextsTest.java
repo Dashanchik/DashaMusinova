@@ -12,7 +12,6 @@ import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
 //todo постарайся разгруппировать по сьюттам, тестов не очень много, но все-таки так будет наглянее
 
 //todo у тебя к каждом тесте проврок куча! это и хорошо и плохо одновременно)) не всегда оправдано.
