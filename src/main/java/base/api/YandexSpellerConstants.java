@@ -1,18 +1,19 @@
 package base.api;
 
-public class YandexSpelleerConstants {
+public class YandexSpellerConstants {
 
-    //todo для учебного проекта - +/- номально, что полный урл в коде, но на практичке - нужно выность
-    //todo в проперти https://speller.yandex.net/ название энва, т.к. оно может меняться, а управлятьнамного проще из внешнего файла
-    //todo будет время - поправь, пожалуйста ***пожелания***
-    //todo  static final String YANDEX_SPELLER_API_URI = services/spellservice.json/checkTexts";
-    static final String YANDEX_SPELLER_API_URI = "https://speller.yandex.net/services/spellservice.json/checkTexts";
+    //todo для учебного проекта - +/- номально, что полный урл в коде, но на практичке - нужно выность - done
+    //todo в проперти https://speller.yandex.net/ название энва, т.к. оно может меняться, а управлятьнамного проще из внешнего файла - done
+    //todo будет время - поправь, пожалуйста ***пожелания*** - done
+    //todo  static final String YANDEX_SPELLER_API_URI = services/spellservice.json/checkTexts"; - done
+    static final String YANDEX_SPELLER_API_URI = "services/spellservice.json/checkTexts";
     static final String PARAM_TEXTS = "text";
     static final String PARAM_OPTIONS = "options";
     static final String PARAM_LANGUAGES = "languages";
 
     //todo хорошо, что есть енамы, но этот енам не для уровняобвязок. Это на уровень тестов больше похоже,
-    // todo более того - на уровень одного датапровайдера ***замечания***
+    //todo более того - на уровень одного датапровайдера ***замечания*** - они используются в дата провайдере, который я сейчас дописала.
+    //todo плюс у меня тесты принимают разные количества этих данных, для них надо писать разные дата провайдеры?
     public enum SimpleWord {
         MINUTE_RU("минута", "минутта"),
         HOUR_RU("час", "ччас"),

@@ -13,7 +13,8 @@ import java.util.List;
 public class YandexSpellerAnswer {
 
     @SerializedName("code")//todo нет необходимости, т.к. название переменной и значение в аннотации совпадают.
-    @Expose//todo зачем эта аннотация?
+    //todo - это автоматически сгенерированный класс с помощью jsonschema2pojo plugin-a
+    @Expose//todo зачем эта аннотация? - он создает все эти аннотации каждый раз при создании класса.
     public Integer code;
     @SerializedName("pos")
     @Expose
@@ -32,7 +33,7 @@ public class YandexSpellerAnswer {
     public String word;
     @SerializedName("s")
     @Expose
-    public List<String> s = new ArrayList<String>();
+    public List<String> s = new ArrayList<>();
 
     @Override
     public String toString() {
