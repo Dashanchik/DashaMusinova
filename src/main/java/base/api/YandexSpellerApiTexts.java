@@ -1,15 +1,5 @@
 package base.api;
 
-import static base.api.PropertyAccessor.getPropertyValue;
-import static base.api.YandexSpellerConstants.PARAM_LANGUAGES;
-import static base.api.YandexSpellerConstants.PARAM_OPTIONS;
-import static base.api.YandexSpellerConstants.PARAM_TEXTS;
-import static base.api.YandexSpellerConstants.YANDEX_SPELLER_API_URI;
-import static org.hamcrest.Matchers.lessThan;
-
-import base.api.beans.YandexSpellerAnswer;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -24,6 +14,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.IntStream;
+
+import static base.api.PropertyAccessor.getPropertyValue;
+import static base.api.YandexSpellerConstants.*;
+import static org.hamcrest.Matchers.lessThan;
 
 public class YandexSpellerApiTexts {
 
@@ -72,20 +66,6 @@ public class YandexSpellerApiTexts {
             return new ApiBuilder(api);
         }
 
-        public static List<YandexSpellerAnswer> getYandexSpellerAnswers(Response response) {
-            List<List<YandexSpellerAnswer>> answersList = new Gson()
-                    .fromJson(response.asString().trim(), new TypeToken<List<List<YandexSpellerAnswer>>>() {
-                    }.getType());
-            List<YandexSpellerAnswer> finalAnswerList = new ArrayList<>();
-            for (List<YandexSpellerAnswer> answer : answersList) {
-                if (answer.size() < 1) {
-                    return finalAnswerList;
-                }
-                finalAnswerList.add(answer.get(0));
-            }
-            return finalAnswerList;
-        }
-
         public static ResponseSpecification successResponse() {
             return new ResponseSpecBuilder()
                     .expectContentType(ContentType.JSON)
@@ -101,7 +81,7 @@ public class YandexSpellerApiTexts {
                     //todo зачем это? - deleted
                     //todo зачем это? - deleted
                     //todo зачем это? - deleted
-                    .setBaseUri(YANDEX_SPELLER_API_URI)
+                    .setBaseUri(getPropertyValue()+YANDEX_SPELLER_API_URI)
                     .build();
         }
     }

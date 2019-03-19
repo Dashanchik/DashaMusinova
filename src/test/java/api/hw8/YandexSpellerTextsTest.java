@@ -3,6 +3,7 @@ package api.hw8;
 import static base.api.YandexSpellerApiTexts.ApiBuilder.*;
 import static base.api.YandexSpellerAssertions.*;
 
+import base.api.YandexSpellerApiGetter;
 import base.api.YandexSpellerConstants.Languages;
 import base.api.YandexSpellerConstants.SimpleWord;
 import base.api.YandexSpellerDataProvider;
@@ -18,7 +19,10 @@ import java.util.List;
 //todo, например, для некоторый кейсов сделай так
 // List<YandexSpellerAnswer> expectedAnswer = ....;
 // List<YandexSpellerAnswer> actualAnswer = ....;
-// assertEqual(actualAnswer, expectedAnswer, "Answer is incorrect");
+// assertEqual(actualAnswer, expectedAnswer, "Answer is incorrect"); - не очень тоже понимаю зачем тут формировать готовые объекты и их сравнивать.
+// мы же только получаем статус код и подсказку в ответе - больше ничего не требуется проверять. я думала, что объекты сравниваются когда куча проверок есть и тогда удобнее...
+// но если реализовывать здесь тоже сравнение объектов (List<YandexSpellerAnswer>, то в тесте придется еще писать код на то, чтобы сформировать expected - это тоже не очень красиво выглядеть будет...
+// или как-то по-другому можно сделать?
 public class YandexSpellerTextsTest {
 
     @Test(groups = "statusCodes")
@@ -34,12 +38,12 @@ public class YandexSpellerTextsTest {
     @Test(groups = "spelling", dataProvider = "yandexSpellerData", dataProviderClass = YandexSpellerDataProvider.class)
     public void checkSpellingForOneLanguage(Languages language, String[] wrongWords, String[] correctWords) {
         List<YandexSpellerAnswer> answers =
-                getYandexSpellerAnswers(with()
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(language)
                             .texts(wrongWords)
                         .getYandexSpellerApi());
         assertAnswerSize(answers, correctWords.length);
-        assertAnswersIsCorrect(answers, correctWords);
+        assertAnswersAreCorrect(answers, correctWords);
     }
 
         //todo "Unswers number is not correct." - done
@@ -48,99 +52,99 @@ public class YandexSpellerTextsTest {
 
     @Test(groups = "spelling")
     public void checkSpellingAllLanguages() {
-        List<YandexSpellerAnswer> answer =
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.UK, Languages.EN, Languages.RU)
                         .texts(SimpleWord.MINUTE_UK.wrongVer(), SimpleWord.MINUTE_EN.wrongVer(), SimpleWord.MINUTE_RU.wrongVer())
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 3);
-        assertAnswerIsCorrect(answer,0,SimpleWord.MINUTE_UK.corrVer());
-        assertAnswerIsCorrect(answer,1,SimpleWord.MINUTE_EN.corrVer());
-        assertAnswerIsCorrect(answer,2,SimpleWord.MINUTE_RU.corrVer());
+        assertAnswerSize(answers, 3);
+        assertAnswerIsCorrect(answers,0,SimpleWord.MINUTE_UK.corrVer());
+        assertAnswerIsCorrect(answers,1,SimpleWord.MINUTE_EN.corrVer());
+        assertAnswerIsCorrect(answers,2,SimpleWord.MINUTE_RU.corrVer());
     }
 
     //Test fails
     @Test(groups = "errorCodes")
     public void checkUnknownWordError() {
-        List<YandexSpellerAnswer> answer =
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(0)
                         .texts(SimpleWord.UNKNOWN_WORD.wrongVer())
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 1);
-        assertErrorCodeIsCorrect(answer, 0, 1);
+        assertAnswerSize(answers, 1);
+        assertErrorCodeIsCorrect(answers, 0, 1);
     }
 
     @Test(groups = "options")
     public void checkIgnoreDigitsOption() {
-        List<YandexSpellerAnswer> answer =
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(2)
                         .texts(SimpleWord.MINUTE_EN.corrVer() + "123")
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 0);
+        assertAnswerSize(answers, 0);
     }
 
     @Test(groups = "errorCodes")
     public void checkDigitsError() {
-        List<YandexSpellerAnswer> answer =
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(0)
                         .texts(SimpleWord.MINUTE_EN.corrVer() + "123")
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 1);
-        assertAnswerIsCorrect(answer, 0, SimpleWord.MINUTE_EN.corrVer() + " " + "123");
-        assertErrorCodeIsCorrect(answer, 0, 1);
+        assertAnswerSize(answers, 1);
+        assertAnswerIsCorrect(answers, 0, SimpleWord.MINUTE_EN.corrVer() + " " + "123");
+        assertErrorCodeIsCorrect(answers, 0, 1);
     }
 
     @Test(groups = "options")
     public void checkIgnoreUrlsAndDigitsOption() {
-        List<YandexSpellerAnswer> answer =
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(2, 4)
                         .texts(SimpleWord.URL.wrongVer() + "555")
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 0);
+        assertAnswerSize(answers, 0);
     }
 
     //Test fails
     @Test(groups = "errorCodes")
     public void checkCapitalLettersError() {
-        List<YandexSpellerAnswer> answer =
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(0)
                         .texts(SimpleWord.WORD_WITH_CAPITALS.wrongVer())
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 1);
-        assertErrorCodeIsCorrect(answer, 0, 3);
+        assertAnswerSize(answers, 1);
+        assertErrorCodeIsCorrect(answers, 0, 3);
     }
 
     @Test(groups = "options")
     public void checkIgnoreCapitalLettersAndDigitsOption() {
-        List<YandexSpellerAnswer> answer =
-                //todo разнеси по разным класса формаорование запроса и его исполнение
-                //todo getYandexSpellerAnswers & with должны быть в разных классах
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                //todo разнеси по разным класса формаорование запроса и его исполнение - done
+                //todo getYandexSpellerAnswers & with должны быть в разных классах - done
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(2, 4, 512)
                         .texts(SimpleWord.WORD_WITH_CAPITALS.wrongVer())
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 0);
+        assertAnswerSize(answers, 0);
     }
 
     @Test(groups = "options")
     public void checkFindRepeatWordsOption() {
-        List<YandexSpellerAnswer> answer =
-                getYandexSpellerAnswers(with()
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.RU)
                         .options(512)
                         .texts(SimpleWord.REPEAT_WORD.wrongVer())
                         .getYandexSpellerApi());
-        assertAnswerSize(answer, 0);
+        assertAnswerSize(answers, 0);
     }
 }

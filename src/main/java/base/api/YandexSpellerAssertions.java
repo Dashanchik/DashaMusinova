@@ -18,7 +18,7 @@ public class YandexSpellerAssertions {
         assertThat("The answer is wrong", answer.get(answerNumber).s, hasItem(corrVer));
     }
 
-    public static void assertAnswersIsCorrect(List<YandexSpellerAnswer> answers, String[] correctAnswers) {
+    public static void assertAnswersAreCorrect(List<YandexSpellerAnswer> answers, String[] correctAnswers) {
         for (int i = 0; i < correctAnswers.length; i++){
             assertThat("The answer is wrong", answers.get(i).s, hasItem(correctAnswers[i]));
         }
