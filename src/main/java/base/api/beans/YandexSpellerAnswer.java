@@ -1,8 +1,6 @@
 
 package base.api.beans;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -12,27 +10,24 @@ import java.util.List;
 
 public class YandexSpellerAnswer {
 
-    @SerializedName("code")//todo нет необходимости, т.к. название переменной и значение в аннотации совпадают. - это автоматически сгенерированный класс с помощью jsonschema2pojo plugin-a
-    @Expose//todo зачем эта аннотация? - он создает все эти аннотации каждый раз при создании класса.
     public Integer code;
-    @SerializedName("pos")
-    @Expose
     public Integer pos;
-    @SerializedName("row")
-    @Expose
     public Integer row;
-    @SerializedName("col")
-    @Expose
     public Integer col;
-    @SerializedName("len")
-    @Expose
     public Integer len;
-    @SerializedName("word")
-    @Expose
     public String word;
-    @SerializedName("s")
-    @Expose
     public List<String> s = new ArrayList<>();
+
+    public YandexSpellerAnswer(){
+
+    }
+
+    public YandexSpellerAnswer(Integer code, String word, List<String> s) {
+        this.code = code;
+        this.word = word;
+        this.s = s;
+    }
+
 
     @Override
     public String toString() {
@@ -53,7 +48,7 @@ public class YandexSpellerAnswer {
             return false;
         }
         YandexSpellerAnswer rhs = ((YandexSpellerAnswer) other);
-        return new EqualsBuilder().append(col, rhs.col).append(code, rhs.code).append(s, rhs.s).append(len, rhs.len).append(pos, rhs.pos).append(row, rhs.row).append(word, rhs.word).isEquals();
+        return new EqualsBuilder().append(code, rhs.code).append(s, rhs.s).append(word, rhs.word).isEquals();
     }
 
 }

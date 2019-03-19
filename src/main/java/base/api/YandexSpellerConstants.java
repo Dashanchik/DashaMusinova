@@ -12,38 +12,7 @@ public class YandexSpellerConstants {
     static final String PARAM_LANGUAGES = "languages";
 
     //todo хорошо, что есть енамы, но этот енам не для уровняобвязок. Это на уровень тестов больше похоже,
-    //todo более того - на уровень одного датапровайдера ***замечания*** - у меня в тестах же разные проверки (по бизнес логике)
-    // todo а если я все свои тесты причешу под один дата провайдер, то получится, что тестов будет всего пара штук.
-    // todo при чем после прохождения тестов будет не очень удобно диагностировать ошибки, а тут прям из названия теста видно.
-    // todo или может я как-то не так поняла и требуется сделать что-то другое?
-    public enum SimpleWord {
-        MINUTE_RU("минута", "минутта"),
-        HOUR_RU("час", "ччас"),
-        MINUTE_UK("хвилина", "хвиллина"),
-        HOUR_UK("година", "годиина"),
-        MINUTE_EN("minute", "minuute"),
-        HOUR_EN("hour", "houur"),
-        URL("google.com", "google"),
-        WORD_WITH_CAPITALS("word", "wOrD"),
-        REPEAT_WORD("на", "Едем на на юг!"),
-        UNKNOWN_WORD("sdsdffd", "sdsdffd");
-
-        private String corrVer;
-        private String wrongVer;
-
-        public String corrVer() {
-            return corrVer;
-        }
-
-        public String wrongVer() {
-            return wrongVer;
-        }
-
-        SimpleWord(String corrVer, String wrongVer) {
-            this.corrVer = corrVer;
-            this.wrongVer = wrongVer;
-        }
-    }
+    //todo более того - на уровень одного датапровайдера ***замечания*** - done, enum deleted
 
     public enum Languages {
         EN("en"),

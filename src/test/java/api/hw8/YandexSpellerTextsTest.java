@@ -2,16 +2,16 @@ package api.hw8;
 
 import static base.api.YandexSpellerApiTexts.ApiBuilder.*;
 import static base.api.YandexSpellerAssertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import base.api.YandexSpellerApiGetter;
 import base.api.YandexSpellerConstants.Languages;
-import base.api.YandexSpellerConstants.SimpleWord;
 import base.api.YandexSpellerDataProvider;
 import base.api.beans.YandexSpellerAnswer;
 import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import java.util.*;
 //todo постарайся разгруппировать по сьюттам, тестов не очень много, но все-таки так будет наглянее - done
 
 //todo у тебя к каждом тесте проврок куча! это и хорошо и плохо одновременно)) не всегда оправдано.
@@ -19,10 +19,7 @@ import java.util.List;
 //todo, например, для некоторый кейсов сделай так
 // List<YandexSpellerAnswer> expectedAnswer = ....;
 // List<YandexSpellerAnswer> actualAnswer = ....;
-// assertEqual(actualAnswer, expectedAnswer, "Answer is incorrect"); - не очень тоже понимаю зачем тут формировать готовые объекты и их сравнивать.
-// мы же только получаем статус код и подсказку в ответе - больше ничего не требуется проверять. я думала, что объекты сравниваются когда куча проверок есть и тогда удобнее...
-// но если реализовывать здесь тоже сравнение объектов (List<YandexSpellerAnswer>, то в тесте придется еще писать код на то, чтобы сформировать expected - это тоже не очень красиво выглядеть будет...
-// или как-то по-другому можно сделать?
+// assertEqual(actualAnswer, expectedAnswer, "Answer is incorrect"); - done, see checkDigitsError() and checkDifferentLanguageHints() tests
 public class YandexSpellerTextsTest {
 
     @Test(groups = "statusCodes")
@@ -36,32 +33,19 @@ public class YandexSpellerTextsTest {
     //todo checkSpellingEnglishWords, checkSpellingRussianWords, checkSpellingUkranianWords - done
     //todo тут один сценарий и незачем его кописровать - просто используй DataProvider - done
     @Test(groups = "spelling", dataProvider = "yandexSpellerData", dataProviderClass = YandexSpellerDataProvider.class)
-    public void checkSpellingForOneLanguage(Languages language, String[] wrongWords, String[] correctWords) {
+    public void checkSpellingForOneLanguage(Languages[] languages, String[] wrongWords, String[] correctWords) {
         List<YandexSpellerAnswer> answers =
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
-                        .languages(language)
-                            .texts(wrongWords)
+                        .languages(languages)
+                        .texts(wrongWords)
                         .getYandexSpellerApi());
         assertAnswerSize(answers, correctWords.length);
         assertAnswersAreCorrect(answers, correctWords);
     }
 
-        //todo "Unswers number is not correct." - done
-        //todo сильно много, где встречается. лучше спрятать это в отдельный класс с асертами и назвать метод, например, assertAnswerSize(answer, 2); - done
-        //todo комментарий аналогичный - done
-
-    @Test(groups = "spelling")
-    public void checkSpellingAllLanguages() {
-        List<YandexSpellerAnswer> answers =
-                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
-                        .languages(Languages.UK, Languages.EN, Languages.RU)
-                        .texts(SimpleWord.MINUTE_UK.wrongVer(), SimpleWord.MINUTE_EN.wrongVer(), SimpleWord.MINUTE_RU.wrongVer())
-                        .getYandexSpellerApi());
-        assertAnswerSize(answers, 3);
-        assertAnswerIsCorrect(answers,0,SimpleWord.MINUTE_UK.corrVer());
-        assertAnswerIsCorrect(answers,1,SimpleWord.MINUTE_EN.corrVer());
-        assertAnswerIsCorrect(answers,2,SimpleWord.MINUTE_RU.corrVer());
-    }
+    //todo "Unswers number is not correct." - done
+    //todo сильно много, где встречается. лучше спрятать это в отдельный класс с асертами и назвать метод, например, assertAnswerSize(answer, 2); - done
+    //todo комментарий аналогичный - done
 
     //Test fails
     @Test(groups = "errorCodes")
@@ -70,10 +54,11 @@ public class YandexSpellerTextsTest {
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(0)
-                        .texts(SimpleWord.UNKNOWN_WORD.wrongVer())
+                        .texts("sdsdffd")
                         .getYandexSpellerApi());
+        YandexSpellerAnswer expectedAnswer = new YandexSpellerAnswer(1, "sdsdffd", Arrays.asList("sdsdffd"));
+        assertThat("The answer is wrong", expectedAnswer.equals(answers.get(0)));
         assertAnswerSize(answers, 1);
-        assertErrorCodeIsCorrect(answers, 0, 1);
     }
 
     @Test(groups = "options")
@@ -82,7 +67,7 @@ public class YandexSpellerTextsTest {
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(2)
-                        .texts(SimpleWord.MINUTE_EN.corrVer() + "123")
+                        .texts("minute" + "123")
                         .getYandexSpellerApi());
         assertAnswerSize(answers, 0);
     }
@@ -93,11 +78,24 @@ public class YandexSpellerTextsTest {
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(0)
-                        .texts(SimpleWord.MINUTE_EN.corrVer() + "123")
+                        .texts("minute" + "123")
                         .getYandexSpellerApi());
+        YandexSpellerAnswer expectedAnswer = new YandexSpellerAnswer(1, "minute" + "123", Arrays.asList("minute 123", "minutes 123", "minister 123"));
+        assertThat("The answer is wrong", expectedAnswer.equals(answers.get(0)));
         assertAnswerSize(answers, 1);
-        assertAnswerIsCorrect(answers, 0, SimpleWord.MINUTE_EN.corrVer() + " " + "123");
-        assertErrorCodeIsCorrect(answers, 0, 1);
+    }
+
+    @Test(groups = "errorCodes")
+    public void checkDifferentLanguageHints() {
+        List<YandexSpellerAnswer> answers =
+                YandexSpellerApiGetter.getYandexSpellerAnswers(with()
+                        .languages(Languages.EN)
+                        .options(0)
+                        .texts("яблоняя")
+                        .getYandexSpellerApi());
+        YandexSpellerAnswer expectedAnswer = new YandexSpellerAnswer(1, "яблоняя", Arrays.asList("яблоня", "яблочная", "яблоная"));
+        assertThat("The answer is wrong", expectedAnswer.equals(answers.get(0)));
+        assertAnswerSize(answers, 1);
     }
 
     @Test(groups = "options")
@@ -106,7 +104,7 @@ public class YandexSpellerTextsTest {
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(2, 4)
-                        .texts(SimpleWord.URL.wrongVer() + "555")
+                        .texts("google.com" + "555")
                         .getYandexSpellerApi());
         assertAnswerSize(answers, 0);
     }
@@ -118,7 +116,7 @@ public class YandexSpellerTextsTest {
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(0)
-                        .texts(SimpleWord.WORD_WITH_CAPITALS.wrongVer())
+                        .texts("wOrD")
                         .getYandexSpellerApi());
         assertAnswerSize(answers, 1);
         assertErrorCodeIsCorrect(answers, 0, 3);
@@ -132,7 +130,7 @@ public class YandexSpellerTextsTest {
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(2, 4, 512)
-                        .texts(SimpleWord.WORD_WITH_CAPITALS.wrongVer())
+                        .texts("wOrD")
                         .getYandexSpellerApi());
         assertAnswerSize(answers, 0);
     }
@@ -143,7 +141,7 @@ public class YandexSpellerTextsTest {
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.RU)
                         .options(512)
-                        .texts(SimpleWord.REPEAT_WORD.wrongVer())
+                        .texts("Едем на на юг!")
                         .getYandexSpellerApi());
         assertAnswerSize(answers, 0);
     }
