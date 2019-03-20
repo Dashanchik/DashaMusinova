@@ -12,26 +12,17 @@ import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 
 import java.util.*;
-//todo постарайся разгруппировать по сьюттам, тестов не очень много, но все-таки так будет наглянее - done
 
-//todo у тебя к каждом тесте проврок куча! это и хорошо и плохо одновременно)) не всегда оправдано.
-//todo постарайся сформировать готовые объекты (листы) для проверок, чтобы асер был один, но компдектный
-//todo, например, для некоторый кейсов сделай так
-// List<YandexSpellerAnswer> expectedAnswer = ....;
-// List<YandexSpellerAnswer> actualAnswer = ....;
-// assertEqual(actualAnswer, expectedAnswer, "Answer is incorrect"); - done, see checkDigitsError() and checkDifferentLanguageHints() tests
 public class YandexSpellerTextsTest {
 
     @Test(groups = "statusCodes")
     public void checkStatusCodeSuccess() {
         RestAssured
-                .given(baseRequestConfiguration())//todo не стесняйся использовать статический импорт - так читабельнее - done
-                .get()//todo .prettyPeek() в этом нет необходимости - deleted
+                .given(baseRequestConfiguration())
+                .get()
                 .then().specification(successResponse());
     }
 
-    //todo checkSpellingEnglishWords, checkSpellingRussianWords, checkSpellingUkranianWords - done
-    //todo тут один сценарий и незачем его кописровать - просто используй DataProvider - done
     @Test(groups = "spelling", dataProvider = "yandexSpellerData", dataProviderClass = YandexSpellerDataProvider.class)
     public void checkSpellingForOneLanguage(Languages[] languages, String[] wrongWords, String[] correctWords) {
         List<YandexSpellerAnswer> answers =
@@ -42,10 +33,6 @@ public class YandexSpellerTextsTest {
         assertAnswerSize(answers, correctWords.length);
         assertAnswersAreCorrect(answers, correctWords);
     }
-
-    //todo "Unswers number is not correct." - done
-    //todo сильно много, где встречается. лучше спрятать это в отдельный класс с асертами и назвать метод, например, assertAnswerSize(answer, 2); - done
-    //todo комментарий аналогичный - done
 
     //Test fails
     @Test(groups = "errorCodes")
@@ -125,8 +112,6 @@ public class YandexSpellerTextsTest {
     @Test(groups = "options")
     public void checkIgnoreCapitalLettersAndDigitsOption() {
         List<YandexSpellerAnswer> answers =
-                //todo разнеси по разным класса формаорование запроса и его исполнение - done
-                //todo getYandexSpellerAnswers & with должны быть в разных классах - done
                 YandexSpellerApiGetter.getYandexSpellerAnswers(with()
                         .languages(Languages.EN)
                         .options(2, 4, 512)

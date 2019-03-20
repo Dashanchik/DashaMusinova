@@ -1,4 +1,3 @@
-
 package base.api.beans;
 
 import org.apache.commons.lang.builder.EqualsBuilder;

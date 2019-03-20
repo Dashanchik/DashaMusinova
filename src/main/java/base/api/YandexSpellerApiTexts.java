@@ -22,11 +22,11 @@ import static org.hamcrest.Matchers.lessThan;
 public class YandexSpellerApiTexts {
 
     private YandexSpellerApiTexts() {
-    }//todo зачем дефолтный конструктор? ***з*** - чтобы нельзя было создать объект класса
+    }
 
     private HashMap<String, Object> params = new HashMap<>();
 
-    public static class ApiBuilder {//todo отправь либо вниз класса, а лучше в отдельный файл - done, он внизу класса. не вижу смысла в отдельный класс его выносить - тут не очень много логики и она вся про создание апи запроса
+    public static class ApiBuilder {
         YandexSpellerApiTexts spellerApi;
 
         private ApiBuilder(YandexSpellerApiTexts gcApi) {
@@ -54,7 +54,7 @@ public class YandexSpellerApiTexts {
             return this;
         }
 
-        public Response getYandexSpellerApi() { // todo вообще не очень говорящее название метода. если метод делает get, то  и назввай его getSomething()... - done
+        public Response getYandexSpellerApi() {
             return RestAssured.with()
                     .queryParams(spellerApi.params)
                     .log().all()
@@ -78,9 +78,6 @@ public class YandexSpellerApiTexts {
         public static RequestSpecification baseRequestConfiguration() {
             return new RequestSpecBuilder()
                     .setAccept(ContentType.XML)
-                    //todo зачем это? - deleted
-                    //todo зачем это? - deleted
-                    //todo зачем это? - deleted
                     .setBaseUri(getPropertyValue()+YANDEX_SPELLER_API_URI)
                     .build();
         }
